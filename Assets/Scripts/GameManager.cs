@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Gm;
-
     public GameObject player;
 
     public enum GameStates { Playing, Death, BeatLevel };
@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour
 
     public string CurrentLevel = "SampleScene";
     public string NextLevel = "SampleScene";
-
     public bool GameIsOver;
+
+    public int ScoreCoins = 0;
+    public Text MainScoreCoins;
 
     private PlayerBehaviour playerState;
 
@@ -25,6 +27,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerState = player.GetComponent<PlayerBehaviour>();
+
+        if (Gm == null)
+        {
+            Gm = gameObject.GetComponent<GameManager>();
+        }
     }
 
 
@@ -45,6 +52,35 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(NextLevel);
                 break;
         }
+
+    }
+
+    public void Collect(int amount, string tag)
+    {
+        if(tag == "Coin")
+        {
+            ScoreCoins += amount;
+            MainScoreCoins.text = "X  " + ScoreCoins.ToString();
+            Debug.Log("Final Score: " + ScoreCoins);
+        }
+
+
+        //switch (tag)
+        //{
+        //    case "Coin":
+        //        ScoreCoins += amount;
+        //        MainScoreCoins.text = "X  " + ScoreCoins.ToString();
+        //        Debug.Log("Final Score: " + ScoreCoins);
+
+        //        break;
+
+        //    case "Gem":
+        //        ScoreGems += amount;
+        //        MainScoreGems.text = "X  " + ScoreGems.ToString();
+        //        Debug.Log("Final Score: " + ScoreGems);
+
+        //        break;
+        //}
 
     }
 }

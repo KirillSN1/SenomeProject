@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4031992628903212437}
   - component: {fileID: 4031992628903212438}
   - component: {fileID: 252536833}
-  m_Layer: 0
+  - component: {fileID: 7622144419794504710}
+  m_Layer: 8
   m_Name: HurtBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4031992628903212439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.0935335, y: -0.3294685, z: -3.0070617}
-  m_LocalScale: {x: 1, y: 1.293, z: 1}
+  m_LocalScale: {x: 1, y: 0.33900163, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,7 +92,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -107,3 +108,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7622144419794504710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031992628903212439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ddc42b6f59d784fb92d131a8786565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
