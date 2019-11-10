@@ -15,7 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int Attack = 1;
     public float Speed = 4;
    // public int SightDistance = 1;   // поле зрения игрока
-    public Transform Vision;
+    public Transform SightDistance;
 
     [Range(1, 10)]
     public float JumpingVelocity;
@@ -142,8 +142,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void DetectEnemy()              // определяем, что враг находится в поле зрения игрока
     {
-        _currentPosition = new Vector2(transform.position.x, Vision.position.y);
-        _endPosition = new Vector2(Vision.position.x, Vision.position.y);
+        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+        _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
 
         var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
 
@@ -208,8 +208,8 @@ public class PlayerBehaviour : MonoBehaviour
     {    
         Gizmos.color = Color.red;
 
-        _currentPosition = new Vector2(transform.position.x, Vision.position.y);
-        _endPosition = new Vector2(Vision.position.x, Vision.position.y);
+        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+        _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
 
         Gizmos.DrawLine(_currentPosition, _endPosition);
     }

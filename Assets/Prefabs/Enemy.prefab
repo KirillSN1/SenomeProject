@@ -171,7 +171,7 @@ MonoBehaviour:
   IsAlive: 1
   Health: 5
   ChaseRadius: 3
-  HomePosition: {x: -33.9, y: -1.61, z: 0}
+  HomePosition: {x: 9.95, y: -1.61, z: 0}
   Target: {fileID: 0}
   Anim: {fileID: 1829401115}
   EnemyState: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c780eb3e2b25045b9cc51afe60a3a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeBetweenAttack: 2
+  TimeBetweenAttack: 1
   TimeTillAttack: 0
 --- !u!61 &1584317413
 BoxCollider2D:

@@ -3576,12 +3576,12 @@ MonoBehaviour:
   Health: 5
   Attack: 1
   Speed: 4
-  Vision: {fileID: 1650014109}
+  SightDistance: {fileID: 1650014109}
   JumpingVelocity: 8
   IsAlive: 1
   JumpButton: 32
   AttackButton: 101
-  KeyboardInput: 0
+  KeyboardInput: 1
   MInput: 0
   AccelerationValue: 1.066
   Feet: {fileID: 35473642}
@@ -14499,7 +14499,7 @@ PrefabInstance:
     - target: {fileID: 4031992628903212437, guid: 42cb621f73c82c749bacd3555ad0db15,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.482
+      value: -18.65
       objectReference: {fileID: 0}
     - target: {fileID: 4031992628903212437, guid: 42cb621f73c82c749bacd3555ad0db15,
         type: 3}
@@ -14554,7 +14554,7 @@ PrefabInstance:
     - target: {fileID: 4031992628903212437, guid: 42cb621f73c82c749bacd3555ad0db15,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.7929733
+      value: 1.4565017
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42cb621f73c82c749bacd3555ad0db15, type: 3}
@@ -15572,7 +15572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650014109}
   m_Layer: 0
-  m_Name: VisionDistance
+  m_Name: VisionEndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16716,7 +16716,7 @@ PrefabInstance:
     - target: {fileID: 4145093559926449416, guid: af6f562b7e010ab4a966a23beac21ce0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.53
+      value: 4.31
       objectReference: {fileID: 0}
     - target: {fileID: 4145093559926449416, guid: af6f562b7e010ab4a966a23beac21ce0,
         type: 3}
@@ -17964,12 +17964,7 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 665896605}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HomePosition.x
-      value: 9.95
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2119526622, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
 --- !u!1001 &7747011072055116829
 PrefabInstance:
