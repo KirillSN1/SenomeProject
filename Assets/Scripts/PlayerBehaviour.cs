@@ -88,6 +88,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Anim.SetBool("ReceiveDamage", true);
         Health -= takenDamage;
+        transform.GetComponent<Renderer>().material.color = Color.red;
 
         yield return null;
 
@@ -96,6 +97,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return null;
 
         Anim.SetBool("ReceiveDamage", false);
+        transform.GetComponent<Renderer>().material.color = Color.white;
     }
 
     public void Motion()
@@ -121,8 +123,7 @@ public class PlayerBehaviour : MonoBehaviour
                 ++JumpsNum;
                 rb.velocity = (Vector2.up * JumpingVelocity) + new Vector2(rb.velocity.x,0);
             }
-            else
-            if (isGrounded && JumpsNum >0)
+            else if (isGrounded && JumpsNum >0)
             {
                 JumpsNum = 0;
             }
@@ -136,7 +137,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 
        isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
-        AnimationController();
+       AnimationController();
     }
 
 
@@ -174,7 +175,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (enemy!= null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
         {
-           StartCoroutine(enemy.GetComponent<EnemyBasicAI>().ReceiveDamage(Attack));
+           var enemyBasicAI = enemy.GetComponent<EnemyBasicAI>();
+           StartCoroutine(enemyBasicAI.ReceiveDamage(Attack));
         }
 
         yield return new WaitForSeconds(.1f);

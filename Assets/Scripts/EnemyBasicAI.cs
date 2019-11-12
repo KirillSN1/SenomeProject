@@ -7,24 +7,39 @@ public class EnemyBasicAI : EnemySettings
     [Header("AI Settings")]
     public float ChaseRadius = 5f;          // радиус преследования
     public Vector3 HomePosition;             // позиция, куда возвращается враг, если игрок вышел за пределы ChaseRadius
+    public Transform SightDistance;         // поле зрения врага
 
+    public float TimeBetweenAttack = .2f;
+    public float TimeTillAttack;
 
     [Header("Unity Settings")]
     public Transform Target;
     public Animator Anim;
 
-    private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
-
     public enum EnemyStates { Idling, Attacking, Running, ReceivingDamage, Dying };
     public EnemyStates EnemyState = EnemyStates.Idling;
 
+    private enum LookingDirections { Left = -1, Right = 1 };     // для анимации - выбор стороны для поворота
+    private KnockBack _knockBack;
+    private Vector2 _currentPosition;
+    private Vector2 _endPosition;
+
     void Awake()
     {
+        _knockBack = GetComponent<KnockBack>();
+
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         Anim = GetComponent<Animator>();
 
         IsAlive = true;
         Anim.SetBool("isAlive", IsAlive);
+
+        SightDistance = transform.Find("VisionEndPointRight");
+        SightDistance.gameObject.SetActive(true);
+
+        var leftSightPoint = transform.Find("VisionEndPointLeft");
+        leftSightPoint.gameObject.SetActive(false);
+
     }
 
 
@@ -37,13 +52,62 @@ public class EnemyBasicAI : EnemySettings
 
        // if (EnemyState != EnemyStates.Attacking && EnemyState != EnemyStates.ReceivingDamage && EnemyState != EnemyStates.Dying) 
        if (EnemyState == EnemyStates.Running || EnemyState == EnemyStates.Idling)
-        {
+       {
             ChaseThePlayer();
+            DetectPlayer();
+       }
+    }
+
+    public void DetectPlayer()              // определяем, что враг находится в поле зрения игрока
+    {
+        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+        _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
+
+        var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
+
+        foreach (var obj in hits)
+        {
+            var target = obj.collider.gameObject;
+
+            if (target.CompareTag("Player"))   // игрок увидел противника
+            {
+                if (TimeTillAttack <= 0)
+                {
+                    StartCoroutine(AttackThePlayer(target));
+                    _knockBack.HitSomeObject(target);
+
+                    TimeTillAttack = TimeBetweenAttack;
+                }
+                TimeTillAttack -= Time.deltaTime;
+
+               // StartCoroutine(AttackThePlayer(target));           // атаковать противника
+               //_knockBack.HitSomeObject(target);              
+            }
         }
     }
 
+    private IEnumerator AttackThePlayer(GameObject player)
+    {
+        EnemyState = EnemyBasicAI.EnemyStates.Attacking;
+        Anim.SetBool("isAttacking", true);
+        Anim.SetBool("isRunningEnemy", false);
 
-    private IEnumerator WanishingAnimation()
+        yield return null;
+
+        var playerBehaviour = player.GetComponent<PlayerBehaviour>();
+
+        StartCoroutine(playerBehaviour.ReceiveDamage(Attack));
+
+        yield return new WaitForSeconds(.6f);
+
+        Anim.SetBool("isAttacking", false);
+        //  yield return new WaitForSeconds(.3f);    // время, которое занимает проигрыш получения удара у игрока
+
+        yield return null;
+        EnemyState = EnemyBasicAI.EnemyStates.Idling;
+    }
+
+    public IEnumerator WanishingAnimation()
     {
         if(gameObject != null)
         {
@@ -95,9 +159,10 @@ public class EnemyBasicAI : EnemySettings
 
         var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
         var distanceToTarget = Vector3.Distance(transform.position, Target.position);
+     //   var distanceToTarget = Vector3.Distance(transform.position, toTarget);
 
 
-        if (distanceToTarget <= ChaseRadius && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0)  // игрок в зоне преследования, а враг на HomePosition
+        if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования, а враг на HomePosition  && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
@@ -115,9 +180,7 @@ public class EnemyBasicAI : EnemySettings
         {
             EnemyState = EnemyStates.Idling;
             Anim.SetBool("isRunningEnemy", false);      // idle state
-        }
-        
-
+        }  
     }
 
     private void AnimateRunning(Vector3 target)
@@ -140,22 +203,36 @@ public class EnemyBasicAI : EnemySettings
         switch (motionState)
         {
             case LookingDirections.Right:
-                Anim.SetFloat("motionH", 1);
+
+                Anim.SetFloat("motionH", (float)LookingDirections.Right);
+                SightDistance = transform.Find("VisionEndPointRight");
+                SightDistance.gameObject.SetActive(true);
+
+                var leftSightPoint = transform.Find("VisionEndPointLeft");
+                leftSightPoint.gameObject.SetActive(false);
+
                 break;
 
             case LookingDirections.Left:
-                Anim.SetFloat("motionH", -1);
+
+                Anim.SetFloat("motionH", (float)LookingDirections.Left);
+                SightDistance = transform.Find("VisionEndPointLeft");
+                SightDistance.gameObject.SetActive(true);
+
+                var rightSightPoint = transform.Find("VisionEndPointRight");
+                rightSightPoint.gameObject.SetActive(false);
+
                 break;
         }
     }
 
-    void OnDrawGizmosSelected()      // рисует радиус преследования врага, при выборе врага на сцене
+    void OnDrawGizmosSelected()      // показывает поле зрения игрока
     {
-        // Display the explosion radius when selected
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, ChaseRadius);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, Target.position);
+        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+        _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
+
+        Gizmos.DrawLine(_currentPosition, _endPosition);
     }
 }

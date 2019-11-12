@@ -14,12 +14,24 @@ public class KnockBack : MonoBehaviour
 
         if (objToKnock != null)
         {
-            Vector2 difference = objToKnock.transform.position - transform.position;
-            difference = difference.normalized * KnockBackSpeed;
+            if(objToKnock.CompareTag("Player"))
+            {
+             //   objToKnock.GetComponent<Renderer>().material.color = Color.red;
+                
+                objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
 
-            objToKnock.AddForce(difference, ForceMode2D.Impulse);
+                StartCoroutine(KnockBackLastForPlayer(objToKnock));
+             //   objToKnock.GetComponent<Renderer>().material.color = Color.white;
+            }
+            else
+            {
+               Vector2 difference = objToKnock.transform.position - transform.position;
+               difference = difference.normalized * KnockBackSpeed;
 
-            StartCoroutine(KnockBackLast(objToKnock));
+               objToKnock.AddForce(difference, ForceMode2D.Impulse);
+
+               StartCoroutine(KnockBackLast(objToKnock));
+            } 
         }
     }
 
@@ -28,8 +40,20 @@ public class KnockBack : MonoBehaviour
         yield return new WaitForSeconds(KnockTime);
         if (objToKnock != null)
         {
-         //   yield return new WaitForSeconds(KnockTime);
             objToKnock.velocity = Vector2.zero;
         }
+    }
+
+    public IEnumerator KnockBackLastForPlayer(Rigidbody2D objToKnock)
+    {
+      //  objToKnock.GetComponent<Renderer>().material.color = Color.red;
+
+        yield return new WaitForSeconds(KnockTime);
+        if (objToKnock != null)
+        {
+            objToKnock.velocity = Vector2.zero;
+        }
+
+     //   objToKnock.GetComponent<Renderer>().material.color = Color.white;
     }
 }

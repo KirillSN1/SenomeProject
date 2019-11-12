@@ -24,7 +24,6 @@ public class HurtBox : MonoBehaviour
         }
     }
 
-
     void Update()
     {
   
@@ -67,11 +66,6 @@ public class HurtBox : MonoBehaviour
         StartCoroutine(playerBehaviour.ReceiveDamage(amount));
 
         yield return new WaitForSeconds(.6f);
-
-        //var amount = transform.parent.GetComponent<EnemyBasicAI>().Attack;
-        //var playerBehaviour = player.GetComponent<PlayerBehaviour>();
-
-    //    StartCoroutine(playerBehaviour.ReceiveDamage(amount));
 
         _anim.SetBool("isAttacking", false);
       //  yield return new WaitForSeconds(.3f);    // время, которое занимает проигрыш получения удара у игрока

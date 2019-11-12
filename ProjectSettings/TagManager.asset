@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
-  - EnemyAttackRadius
   - Coin
+  - HurtEffectBlock
   layers:
   - Default
   - TransparentFX

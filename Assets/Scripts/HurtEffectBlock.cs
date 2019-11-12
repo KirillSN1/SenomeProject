@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HurtEffectBlock : MonoBehaviour
 {
+    public int DamageAmount = 1;
 
     private void Start()
     {
@@ -14,20 +15,14 @@ public class HurtEffectBlock : MonoBehaviour
     {
         if(obj.gameObject.CompareTag("Player"))
         {
-           var playerHealth = obj.GetComponent<PlayerBehaviour>().Health;
-
-           playerHealth -= 1;
-
-           obj.GetComponent<PlayerBehaviour>().Health = playerHealth;
+           var playerBehaviour = obj.GetComponent<PlayerBehaviour>();
+           StartCoroutine(playerBehaviour.ReceiveDamage(DamageAmount));
         }
 
         if (obj.gameObject.CompareTag("Enemy"))
         {
-           var enemyHealth = obj.GetComponent<EnemySettings>().Health;
-
-           enemyHealth -= 1;
-
-           obj.GetComponent<EnemySettings>().Health = enemyHealth;
+           var enemyBasicAI = obj.GetComponent<EnemyBasicAI>();
+           StartCoroutine(enemyBasicAI.ReceiveDamage(DamageAmount));
         }
     
     }
