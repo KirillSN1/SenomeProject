@@ -6,38 +6,57 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Gm;
-    public GameObject player;
+    
+    [Header("Level Headers")]
+    public string MainMenuLevel = "StartMenu";
+    public string StartGameLevel = "Level1";
+    public string NextLevel = "Level1";
 
-    public enum GameStates { Playing, Death, BeatLevel };
+    [Header("Level Settings")]
+    public bool CanBeatLevel = false;
+    public Text MainScoreCoinsText;
+
+    public static GameManager Gm;
+    public GameObject Player;
+
+    public enum GameStates { OnStartMenu, Playing, Death, BeatLevel };
     public GameStates GameState = GameStates.Playing;
 
-    public string CurrentLevel = "SampleScene";
-    public string NextLevel = "SampleScene";
+    [HideInInspector]
     public bool GameIsOver;
 
-    public int ScoreCoins = 0;
-    public Text MainScoreCoins;
+    [HideInInspector]
+    public string CurrentLevel;
 
-    private PlayerBehaviour playerState;
+    private PlayerBehaviour _playerState;
+    private int _scoreCoins = 0;
 
-   // private bool _playerIsAlive;
-
-    
-    void Start()
+    void Awake()
     {
-        playerState = player.GetComponent<PlayerBehaviour>();
-
         if (Gm == null)
         {
             Gm = gameObject.GetComponent<GameManager>();
         }
-    }
 
+        CurrentLevel = SceneManager.GetActiveScene().name;
+
+        if(CurrentLevel != MainMenuLevel)
+        {
+           Player = GameObject.FindGameObjectWithTag("Player");
+           _playerState = Player.GetComponent<PlayerBehaviour>();
+
+            GameState = GameStates.Playing;
+        }
+        else
+        {
+            GameState = GameStates.OnStartMenu;
+        }
+
+    }
 
     void Update()
     {
-        if(!playerState.IsAlive)
+        if(GameState != GameStates.OnStartMenu && !_playerState.IsAlive)
         {
             GameState = GameStates.Death;
         }
@@ -59,28 +78,9 @@ public class GameManager : MonoBehaviour
     {
         if(tag == "Coin")
         {
-            ScoreCoins += amount;
-            MainScoreCoins.text = "X  " + ScoreCoins.ToString();
-            Debug.Log("Final Score: " + ScoreCoins);
+            _scoreCoins += amount;
+            MainScoreCoinsText.text = "X  " + _scoreCoins.ToString();
+            Debug.Log("Final Score: " + _scoreCoins);
         }
-
-
-        //switch (tag)
-        //{
-        //    case "Coin":
-        //        ScoreCoins += amount;
-        //        MainScoreCoins.text = "X  " + ScoreCoins.ToString();
-        //        Debug.Log("Final Score: " + ScoreCoins);
-
-        //        break;
-
-        //    case "Gem":
-        //        ScoreGems += amount;
-        //        MainScoreGems.text = "X  " + ScoreGems.ToString();
-        //        Debug.Log("Final Score: " + ScoreGems);
-
-        //        break;
-        //}
-
     }
 }

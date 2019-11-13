@@ -5,16 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-    public string startGameLevel = "Level1";
-    public string nextLevel = "Level1";
-    public string levelToRestart = "Level1";
-    public string levelWithArena = "Arena";
-
-
-    public void StartGame()
+    public void StartNewGame()
     {
         Debug.Log("Starting the game!");
-        SceneManager.LoadScene(startGameLevel);
+     //   SceneManager.LoadScene(startGameLevel);
+        SceneManager.LoadScene(GameManager.Gm.StartGameLevel);
     }
 
     public void OpenTip()
@@ -25,19 +20,21 @@ public class MenuButtons : MonoBehaviour
     public void LoadNextLevel()
     {
         Debug.Log("Loading next level");
-        SceneManager.LoadScene(nextLevel);
+    //    SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(GameManager.Gm.NextLevel);
     }
-     public void LoadArena()
+   
+    public void LoadMainMenu()
+    {
+        Debug.Log("Restart level");
+        SceneManager.LoadScene(GameManager.Gm.MainMenuLevel);
+    }
+
+    public void LoadArena()
     {
         // loading level with arena
         Debug.Log("We don't have Arena yet!");
-      //  SceneManager.LoadScene(levelWithArena);
-    }
-
-    public void RestartLevel()
-    {
-        Debug.Log("Restart level");
-        SceneManager.LoadScene(levelToRestart);
+        //  SceneManager.LoadScene(levelWithArena);
     }
 
     public void QuitGame()

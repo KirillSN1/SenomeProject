@@ -12,7 +12,6 @@ public class HurtEffectBlock : MonoBehaviour
     private Vector3 _blockOriginalScale;
     private Vector3 _blockOriginalPosition;
 
-   // private bool _blockTriggerCollider;
     private bool _someoneEnteredBlockOnce;
     private bool _someoneOnBlock;
     private bool _blockIsActive;
