@@ -14,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
     public float Speed = 4;
-   // public int SightDistance = 1;   // поле зрения игрока
+    // public int SightDistance = 1;   // поле зрения игрока
     public Transform SightDistance;
 
     [Range(1, 10)]
@@ -31,6 +31,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     [HideInInspector]
     public float MInput;
+
+    [Header("Audio settings")]
+    public AudioClip[] FootstepsSounds;
+    public AudioClip[] AttackSounds;
+    public AudioClip[] JumpSounds;
+    public AudioClip[] HitSounds;
+
 
     [Header("Unity settings")]
 
@@ -55,8 +62,9 @@ public class PlayerBehaviour : MonoBehaviour
     private float scale;
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
-    private KnockBack _knockBack;      // экземпляр класса KnockBack, который отталкивает противника
-    public AudioSource AClip;
+    private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
+
+    public AudioSource ASourse;
 
     //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
     // public PlayerStates playerState = PlayerStates.Idling;
@@ -69,6 +77,8 @@ public class PlayerBehaviour : MonoBehaviour
         scale = transform.localScale.x;
 
         _knockBack = GetComponent<KnockBack>();
+
+        ASourse = GetComponentInChildren<AudioSource>();
     }
 
     void Update()
@@ -169,7 +179,6 @@ public class PlayerBehaviour : MonoBehaviour
         
         Anim.SetBool("Attack", true);
         if (Anim.GetBool("Attack"))
-        AClip.Play();
 
         yield return null;
 
@@ -203,6 +212,26 @@ public class PlayerBehaviour : MonoBehaviour
         else
         {
             Anim.SetBool("IsGrounded", false);
+        }
+    }
+
+    public void PlayAudioClipEvent()
+    {
+        if (Anim.GetBool("Attack"))
+        {
+            ASourse.PlayOneShot(AttackSounds[Random.Range(0, AttackSounds.Length)]);
+        }
+        if (Anim.GetFloat("Speed") > 0.01f && isGrounded==true)
+        {
+            ASourse.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
+        }
+        if (Anim.GetFloat("JumpVeloc") > 0.01f)
+        {
+            ASourse.PlayOneShot(JumpSounds[Random.Range(0, JumpSounds.Length)]);
+        }
+        if (Anim.GetBool("ReceiveDamage"))
+        {
+            ASourse.PlayOneShot(HitSounds[Random.Range(0, HitSounds.Length)]);
         }
     }
 
