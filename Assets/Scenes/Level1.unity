@@ -4095,8 +4095,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 665896605}
   smoothing: 0.1
-  max: {x: 53.31, y: 5.19}
-  min: {x: -2.59, y: 1.04}
+  max: {x: 47.85, y: 5.19}
+  min: {x: 3.78, y: 1.04}
 --- !u!81 &704225791
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4113,7 +4113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704225788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.59, y: 1.04, z: -10}
+  m_LocalPosition: {x: 47.85, y: 2.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4487,7 +4487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.93900007, y: 0.874}
   m_AnchorMax: {x: 0.97023845, y: 0.94545555}
-  m_AnchoredPosition: {x: 0.2000122, y: 0.6999998}
+  m_AnchoredPosition: {x: 0.2000122, y: 0.69999695}
   m_SizeDelta: {x: 0.39999962, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790506465
