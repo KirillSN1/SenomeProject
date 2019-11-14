@@ -6,6 +6,12 @@ public class PickUps : MonoBehaviour
 {
     public int Value = 1;
 
+    private AudioSource CoinSource;
+
+    private void Start()
+    {
+        CoinSource = GameObject.FindGameObjectWithTag("BackgroundSouce").GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,6 +21,7 @@ public class PickUps : MonoBehaviour
             {
                 Debug.Log("Gm is here");
                 GameManager.Gm.Collect(Value, gameObject.tag);     // передаем тег собранного лута
+                PlayAudio();
             }
             else
             {
@@ -23,5 +30,10 @@ public class PickUps : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    void PlayAudio()
+    {
+        CoinSource.PlayOneShot(Resources.Load<AudioClip>("CoinsSound/Coin1"));
     }
 }

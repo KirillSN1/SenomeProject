@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             GameState = GameStates.OnStartMenu;
         }
-
+        
     }
 
     void Update()
