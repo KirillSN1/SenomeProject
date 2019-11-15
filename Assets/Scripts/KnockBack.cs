@@ -15,13 +15,10 @@ public class KnockBack : MonoBehaviour
         if (objToKnock != null)
         {
             if(objToKnock.CompareTag("Player"))
-            {
-             //   objToKnock.GetComponent<Renderer>().material.color = Color.red;
-                
-                objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
+            {      
+               objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
 
-                StartCoroutine(KnockBackLastForPlayer(objToKnock));
-             //   objToKnock.GetComponent<Renderer>().material.color = Color.white;
+               StartCoroutine(KnockBackLast(objToKnock));
             }
             else
             {

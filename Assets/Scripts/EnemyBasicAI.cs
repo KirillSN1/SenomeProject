@@ -78,10 +78,7 @@ public class EnemyBasicAI : EnemySettings
 
                     TimeTillAttack = TimeBetweenAttack;
                 }
-                TimeTillAttack -= Time.deltaTime;
-
-               // StartCoroutine(AttackThePlayer(target));           // атаковать противника
-               //_knockBack.HitSomeObject(target);              
+                TimeTillAttack -= Time.deltaTime;      
             }
         }
     }
@@ -160,7 +157,6 @@ public class EnemyBasicAI : EnemySettings
         var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
         var distanceToTarget = Vector3.Distance(transform.position, Target.position);
      //   var distanceToTarget = Vector3.Distance(transform.position, toTarget);
-
 
         if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования, а враг на HomePosition  && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0
         {
