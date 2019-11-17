@@ -56,38 +56,12 @@ public class MobileInput : MonoBehaviour
 
     public void Jump()
     {
-        if (!main.DoubleJump)
-        {
-
-            if (main.isGrounded)
-            {
-                main.rb.velocity = Vector2.up * main.JumpingVelocity;
-            }
-            if (main.rb.velocity.y < 0) //Ускорение падения
-            {
-                main.rb.velocity = new Vector2(main.rb.velocity.x, main.rb.velocity.y * main.AccelerationValue);
-            }
-        }
-        else
-        {
-            if (main.JumpsNum < 1)
-            {
-                ++main.JumpsNum;
-                main.rb.velocity = (Vector2.up * main.JumpingVelocity) + new Vector2(main.rb.velocity.x, 0);
-            }
-            else
-            if (main.isGrounded && main.JumpsNum > 0)
-            {
-                main.JumpsNum = 0;
-            }
-        }
+        main.Jump();
     }
 
     public void Attack()
     {
         main.DetectEnemy();
     }
-
-
 
 }

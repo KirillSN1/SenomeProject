@@ -257,7 +257,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: BuildKey/user.keystore'
+  AndroidKeystoreName: '{dedicated}: user1.keystore'
   AndroidKeyaliasName: senomestudio
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

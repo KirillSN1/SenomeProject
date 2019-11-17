@@ -8,8 +8,8 @@ TagManager:
   - Enemy
   - Coin
   - HurtEffectBlock
-  - EnemyAttackRadius
-  - MainAudioSource
+  - BackgroundSouce
+  - EnemyWeakSpot
   layers:
   - Default
   - TransparentFX
