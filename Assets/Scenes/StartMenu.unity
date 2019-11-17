@@ -186,9 +186,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ba55494e7cff5489a59b95ffdb00d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundSource: {fileID: 5162944342876257100, guid: 656d8b390dcf43d47b9359232ef79637,
+  BackgroundSourcePrefab: {fileID: 5162944342876257100, guid: 656d8b390dcf43d47b9359232ef79637,
     type: 3}
   gameManager: {fileID: 103065340}
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &294314600
 GameObject:
   m_ObjectHideFlags: 0

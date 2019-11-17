@@ -28,8 +28,7 @@ public class BackgroundMusic : MonoBehaviour
             if (gameManager.CurrentScane == "MainMenu")
             {
                 Instantiate(BackgroundSourcePrefab);
-                MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/MainMenu1"));
-                Debug.Log("oioaprf");
+                //MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/MainMenu1"));
             }
             Debug.Log("null");
         }

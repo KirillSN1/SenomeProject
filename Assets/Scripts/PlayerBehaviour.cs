@@ -123,7 +123,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetKeyDown(JumpButton) && isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x,MovemantCurve.Evaluate(JumpingVelocity));
+                rb.velocity = Vector2.up*JumpingVelocity;
             }
             if (rb.velocity.y < 0)            //Ускорение падения
             {
