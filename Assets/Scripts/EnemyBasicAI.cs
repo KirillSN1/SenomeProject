@@ -24,6 +24,10 @@ public class EnemyBasicAI : EnemySettings
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
 
+    [Header("Audio Settings")]
+    private AudioSource EnemyAudioSource;
+    public AudioClip[] HitSounds;
+
     void Awake()
     {
         _knockBack = GetComponent<KnockBack>();
@@ -40,6 +44,7 @@ public class EnemyBasicAI : EnemySettings
         var leftSightPoint = transform.Find("VisionEndPointLeft");
         leftSightPoint.gameObject.SetActive(false);
 
+        EnemyAudioSource = GetComponentInParent<AudioSource>();
     }
 
 
@@ -131,9 +136,12 @@ public class EnemyBasicAI : EnemySettings
         EnemyState = EnemyStates.ReceivingDamage;
 
         Debug.Log("Enemy got hit!");
-
+        
         Anim.SetBool("isRunningEnemy", false);
         Anim.SetBool("isReceivingDamage", true);
+
+        EnemyAudioSource.PlayOneShot(HitSounds[Random.Range(0, HitSounds.Length)]);
+
         yield return null;
 
         yield return new WaitForSeconds(.6f);    
@@ -235,4 +243,5 @@ public class EnemyBasicAI : EnemySettings
 
         Gizmos.DrawLine(_currentPosition, _endPosition);
     }
+
 }

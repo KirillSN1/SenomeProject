@@ -241,6 +241,8 @@ MonoBehaviour:
   Target: {fileID: 0}
   Anim: {fileID: 1829401115}
   EnemyState: 0
+  HitSounds:
+  - {fileID: 0}
 --- !u!114 &2516001182804754693
 MonoBehaviour:
   m_ObjectHideFlags: 0

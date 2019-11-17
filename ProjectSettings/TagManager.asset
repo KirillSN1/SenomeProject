@@ -9,7 +9,7 @@ TagManager:
   - Coin
   - HurtEffectBlock
   - EnemyAttackRadius
-  - BackgroundSouce
+  - MainAudioSource
   layers:
   - Default
   - TransparentFX

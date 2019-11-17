@@ -28,6 +28,7 @@ public class MenuButtons : MonoBehaviour
     {
         Debug.Log("Restart level");
         SceneManager.LoadScene(GameManager.Gm.MainMenuLevel);
+        Destroy(GameObject.FindGameObjectWithTag("MainAudioSource"));
     }
 
     public void LoadArena()

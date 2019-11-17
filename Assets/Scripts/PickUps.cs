@@ -10,7 +10,7 @@ public class PickUps : MonoBehaviour
 
     private void Start()
     {
-        CoinSource = GameObject.FindGameObjectWithTag("BackgroundSouce").GetComponent<AudioSource>();
+        CoinSource = GetComponentInParent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

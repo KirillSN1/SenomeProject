@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private PlayerBehaviour _playerState;
     private int _scoreCoins = 0;
 
+    public string CurrentScane;
+
     void Awake()
     {
         if (Gm == null)

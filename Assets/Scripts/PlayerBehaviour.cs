@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Android;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -19,6 +20,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Range(1, 10)]
     public float JumpingVelocity;
+
+    public AnimationCurve MovemantCurve;
 
     public bool IsAlive = true;
     // public float JumpTime = 1;
@@ -99,6 +102,7 @@ public class PlayerBehaviour : MonoBehaviour
         Anim.SetBool("ReceiveDamage", true);
         Health -= takenDamage;
         transform.GetComponent<Renderer>().material.color = Color.red;
+        Handheld.Vibrate();                              //Вибрация
 
         yield return null;
 
@@ -119,7 +123,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetKeyDown(JumpButton) && isGrounded)
             {
-                rb.velocity = Vector2.up * JumpingVelocity;
+                rb.velocity = new Vector2(rb.velocity.x,MovemantCurve.Evaluate(JumpingVelocity));
             }
             if (rb.velocity.y < 0)            //Ускорение падения
             {
