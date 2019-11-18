@@ -30,10 +30,10 @@ public class KeyboardInput : MonoBehaviour
             _player.DetectEnemy();
        }
 
-        KeyboardJump();
-
         _player.rb.velocity = new Vector2(_player.MInput * _player.Speed, _player.rb.velocity.y);
         _player.isGrounded = Physics2D.OverlapCircle(_player.Feet.position, _player.feetRadius, _player.Groundlayer);
+
+        KeyboardJump();
     }
 
     public void KeyboardJump()

@@ -15,21 +15,18 @@ public class PlayerBehaviour : MonoBehaviour
     public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
     public float Speed = 4;
-    // public int SightDistance = 1;   // поле зрения игрока
-    public Transform SightDistance;
+    public Transform SightDistance;    // поле зрения игрока
 
     [Range(1, 10)]
     public float JumpingVelocity;
 
-    public AnimationCurve MovemantCurve;
+    public AnimationCurve MovementCurve;
 
     public bool IsAlive = true;
-    // public float JumpTime = 1;
-    // public Vector2 JVelos;
 
     [Header("Input Settings")]
-    public KeyCode JumpButton = KeyCode.Space;
-    public KeyCode AttackButton = KeyCode.E;
+ //   public KeyCode JumpButton = KeyCode.Space;
+  //  public KeyCode AttackButton = KeyCode.E;
     public bool KeyboardInput = false;          //Управление с клавиатуры
 
     [HideInInspector]
@@ -66,13 +63,14 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
+    private KeyboardInput _keyboardInput;
 
     public AudioSource ASourse;
 
-    //  public enum PlayerStates { Idling, Jumping, Attacking, Walking, Dying };
-    // public PlayerStates playerState = PlayerStates.Idling;
+    public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
+    public PlayerStates playerState = PlayerStates.Idling;
 
-    void Start()
+    void Awake()
     {
         Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -82,19 +80,69 @@ public class PlayerBehaviour : MonoBehaviour
         _knockBack = GetComponent<KnockBack>();
 
         ASourse = GetComponentInChildren<AudioSource>();
+
+        if (KeyboardInput)
+        {
+            _keyboardInput = GetComponent<KeyboardInput>();
+        }
     }
 
     void Update()
-    {
-     
+    {   
         if (Health <= 0)
         {
             IsAlive = false;
         }
 
-        Motion();
-        AnimationController();
+        if (playerState != PlayerStates.ReceivingDamage)
+        {
+            if (KeyboardInput)
+            {
+                _keyboardInput.KeyboardWalkAndAttack();
+            }
+            else
+            {
+                Walk();
+            }
+        }
 
+        AnimationController();
+        GetPlayerStates();
+    }
+
+    public void GetPlayerStates()
+    {
+        if (!IsAlive)
+        {
+            playerState = PlayerStates.Dying;
+        }
+        if (Anim.GetBool("ReceiveDamage"))
+        {
+            playerState = PlayerStates.ReceivingDamage;
+        }
+        if (Anim.GetBool("Attack"))
+        {
+            playerState = PlayerStates.Attacking;
+        }
+        if (!Anim.GetBool("IsGrounded"))
+        {
+            if (Anim.GetFloat("JumpVeloc") > 0.01f)
+            {
+                playerState = PlayerStates.Jumping;
+            }
+            else
+            {
+                playerState = PlayerStates.Falling;
+            }
+        }
+        if (Anim.GetBool("IsGrounded") && Anim.GetFloat("Speed") > 0.01f)
+        {
+            playerState = PlayerStates.Walking;
+        }
+        else if (Anim.GetBool("IsGrounded") && Anim.GetFloat("Speed") < 0.01f && !Anim.GetBool("Attack") && !Anim.GetBool("ReceiveDamage"))
+        {
+            playerState = PlayerStates.Idling;
+        }
     }
 
     public IEnumerator ReceiveDamage(int takenDamage)
@@ -114,44 +162,37 @@ public class PlayerBehaviour : MonoBehaviour
         transform.GetComponent<Renderer>().material.color = Color.white;
     }
 
-    public void Motion()
+    public void Walk()
     {
-        if (KeyboardInput)
-        MInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
+        isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
+    }
+
+    public void Jump()    // прыжок для мобильных устройств, вызывается по нажатию кнопки в MobileInput
+    {
         if (!DoubleJump)
         {
-            if (Input.GetKeyDown(JumpButton) && isGrounded)
+            if (isGrounded)
             {
-                rb.velocity = Vector2.up*JumpingVelocity;
+                rb.velocity = Vector2.up * JumpingVelocity;
             }
-            if (rb.velocity.y < 0)            //Ускорение падения
+            if (rb.velocity.y < 0) //Ускорение падения
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * AccelerationValue);
             }
         }
         else
         {
-            if (Input.GetKeyDown(JumpButton) && JumpsNum < 1)
+            if (JumpsNum < 1)
             {
                 ++JumpsNum;
-                rb.velocity = (Vector2.up * JumpingVelocity) + new Vector2(rb.velocity.x,0);
+                rb.velocity = (Vector2.up * JumpingVelocity) + new Vector2(rb.velocity.x, 0);
             }
-            else if (isGrounded && JumpsNum >0)
+            else if (isGrounded && JumpsNum > 0)
             {
                 JumpsNum = 0;
             }
         }
-
-        if (Input.GetKeyDown(AttackButton))      // атаковать enemy
-        {
-            Debug.Log("Pressing E");
-            DetectEnemy();
-        }
-
-
-       isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
-       AnimationController();
     }
 
 

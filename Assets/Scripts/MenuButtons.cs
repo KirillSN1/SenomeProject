@@ -8,7 +8,6 @@ public class MenuButtons : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("Starting the game!");
-     //   SceneManager.LoadScene(startGameLevel);
         SceneManager.LoadScene(GameManager.Gm.StartGameLevel);
     }
 
@@ -20,7 +19,6 @@ public class MenuButtons : MonoBehaviour
     public void LoadNextLevel()
     {
         Debug.Log("Loading next level");
-    //    SceneManager.LoadScene(nextLevel);
         SceneManager.LoadScene(GameManager.Gm.NextLevel);
     }
    
@@ -33,9 +31,7 @@ public class MenuButtons : MonoBehaviour
 
     public void LoadArena()
     {
-        // loading level with arena
         Debug.Log("We don't have Arena yet!");
-        //  SceneManager.LoadScene(levelWithArena);
     }
 
     public void QuitGame()
