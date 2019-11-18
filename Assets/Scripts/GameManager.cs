@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{
-    
+{  
     [Header("Level Headers")]
     public string MainMenuLevel = "StartMenu";
     public string StartGameLevel = "Level1";
@@ -16,10 +15,10 @@ public class GameManager : MonoBehaviour
     public bool CanBeatLevel = false;
     public Text MainScoreCoinsText;
 
-    public static GameManager Gm;
+    public static GameManager Gm;             
     public GameObject Player;
 
-    public enum GameStates { OnStartMenu, Playing, Death, BeatLevel };
+    public enum GameStates { OnMainMenu, Playing, Death, BeatLevel };
     public GameStates GameState = GameStates.Playing;
 
     [HideInInspector]
@@ -51,14 +50,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameState = GameStates.OnStartMenu;
-        }
-        
+            GameState = GameStates.OnMainMenu;
+        }       
     }
 
     void Update()
     {
-        if(GameState != GameStates.OnStartMenu && !_playerState.IsAlive)
+        if(GameState != GameStates.OnMainMenu && !_playerState.IsAlive)
         {
             GameState = GameStates.Death;
         }

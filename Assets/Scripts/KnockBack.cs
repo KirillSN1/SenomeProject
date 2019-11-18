@@ -15,10 +15,19 @@ public class KnockBack : MonoBehaviour
         if (objToKnock != null)
         {
             if(objToKnock.CompareTag("Player"))
-            {      
-               objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
+            {
+                var player = objToKnock.GetComponent<PlayerBehaviour>();
 
-               StartCoroutine(KnockBackLast(objToKnock));
+                if(player.State != PlayerBehaviour.PlayerStates.Falling && player.State != PlayerBehaviour.PlayerStates.Jumping)
+                {
+                    objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
+
+                    StartCoroutine(KnockBackLast(objToKnock));
+                }
+
+               //objToKnock.AddForce(transform.up * KnockBackSpeed, ForceMode2D.Impulse);
+
+               //StartCoroutine(KnockBackLast(objToKnock));
             }
             else
             {

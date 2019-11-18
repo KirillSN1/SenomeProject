@@ -68,7 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioSource ASourse;
 
     public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
-    public PlayerStates playerState = PlayerStates.Idling;
+    public PlayerStates State = PlayerStates.Idling;
 
     void Awake()
     {
@@ -94,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
             IsAlive = false;
         }
 
-        if (playerState != PlayerStates.ReceivingDamage)
+        if (State != PlayerStates.ReceivingDamage)
         {
             if (KeyboardInput)
             {
@@ -114,34 +114,34 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!IsAlive)
         {
-            playerState = PlayerStates.Dying;
+            State = PlayerStates.Dying;
         }
         if (Anim.GetBool("ReceiveDamage"))
         {
-            playerState = PlayerStates.ReceivingDamage;
+            State = PlayerStates.ReceivingDamage;
         }
         if (Anim.GetBool("Attack"))
         {
-            playerState = PlayerStates.Attacking;
+            State = PlayerStates.Attacking;
         }
         if (!Anim.GetBool("IsGrounded"))
         {
             if (Anim.GetFloat("JumpVeloc") > 0.01f)
             {
-                playerState = PlayerStates.Jumping;
+                State = PlayerStates.Jumping;
             }
             else
             {
-                playerState = PlayerStates.Falling;
+                State = PlayerStates.Falling;
             }
         }
         if (Anim.GetBool("IsGrounded") && Anim.GetFloat("Speed") > 0.01f)
         {
-            playerState = PlayerStates.Walking;
+            State = PlayerStates.Walking;
         }
         else if (Anim.GetBool("IsGrounded") && Anim.GetFloat("Speed") < 0.01f && !Anim.GetBool("Attack") && !Anim.GetBool("ReceiveDamage"))
         {
-            playerState = PlayerStates.Idling;
+            State = PlayerStates.Idling;
         }
     }
 
@@ -172,7 +172,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!DoubleJump)
         {
-            if (isGrounded)
+            if (isGrounded && State != PlayerStates.ReceivingDamage)
             {
                 rb.velocity = Vector2.up * JumpingVelocity;
             }
@@ -195,7 +195,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-
     public void DetectEnemy()              // определяем, что враг находится в поле зрения игрока
     {
         _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
@@ -207,36 +206,39 @@ public class PlayerBehaviour : MonoBehaviour
         {
             var target = obj.collider.gameObject;
 
-            if (target.CompareTag("Enemy"))   // игрок увидел противника
+          if(State!= PlayerStates.Attacking)
             {
-                StartCoroutine(AttackTheEnemy(target));           // атаковать противника
-                _knockBack.HitSomeObject(target);
-            }
-            else
-            {
-                StartCoroutine(AttackTheEnemy(null));    // если игрок не видит врага - просто влючить анимацию взамаха меча
+                if (target.CompareTag("Enemy"))   // игрок увидел противника
+                {
+                    StartCoroutine(AttackTheEnemy(target));           // атаковать противника
+
+                    _knockBack.HitSomeObject(target);
+                }
+                else
+                {
+                    StartCoroutine(AttackTheEnemy(null));    // если игрок не видит врага - просто влючить анимацию взамаха меча
+                }
             }
         }
     }
 
     private IEnumerator AttackTheEnemy(GameObject enemy)
     {
-        
         Anim.SetBool("Attack", true);
-        if (Anim.GetBool("Attack"))
 
-        yield return null;
+         yield return null;
 
-        if (enemy!= null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
+        if (enemy != null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
         {
-           var enemyBasicAI = enemy.GetComponent<EnemyBasicAI>();
-           StartCoroutine(enemyBasicAI.ReceiveDamage(Attack));
+            var enemyBasicAI = enemy.GetComponent<EnemyBasicAI>();
+            StartCoroutine(enemyBasicAI.ReceiveDamage(Attack));
         }
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.3f);
 
         Anim.SetBool("Attack", false);
     }
+
 
     public void AnimationController()
     {
@@ -266,7 +268,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             ASourse.PlayOneShot(AttackSounds[Random.Range(0, AttackSounds.Length)]);
         }
-        if (Anim.GetFloat("Speed") > 0.01f && isGrounded==true)
+        if (Anim.GetFloat("Speed") > 0.01f && isGrounded == true)
         {
             ASourse.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
         }
