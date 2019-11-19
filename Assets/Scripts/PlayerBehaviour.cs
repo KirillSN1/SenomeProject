@@ -23,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AnimationCurve MovementCurve;
 
     public bool IsAlive = true;
+    public bool isGrounded = false;
 
     [Header("Input Settings")]
  //   public KeyCode JumpButton = KeyCode.Space;
@@ -57,7 +58,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody2D rb;
-    public bool isGrounded = false;
 
     private float scale;
     private Vector2 _currentPosition;
@@ -65,7 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
 
-    public AudioSource ASourse;
+    public AudioSource ASourсe;
 
     public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
     public PlayerStates State = PlayerStates.Idling;
@@ -79,7 +79,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _knockBack = GetComponent<KnockBack>();
 
-        ASourse = GetComponentInChildren<AudioSource>();
+        ASourсe = GetComponentInChildren<AudioSource>();
 
         if (KeyboardInput)
         {
@@ -244,6 +244,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Anim.SetFloat("Speed", Mathf.Abs(MInput));
         Anim.SetFloat("JumpVeloc", rb.velocity.y);
+
         if (MInput < 0)
         {
             transform.localScale = new Vector3(-scale, transform.localScale.y, transform.localScale.z);
@@ -252,43 +253,44 @@ public class PlayerBehaviour : MonoBehaviour
         {
             transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
         }
-        if (isGrounded)
-        {
-            Anim.SetBool("IsGrounded", true);
-        }
-        else
-        {
-            Anim.SetBool("IsGrounded", false);
-        }
+
+        Anim.SetBool("IsGrounded", isGrounded);
     }
 
     public void PlayAudioClipEvent()
     {
         if (Anim.GetBool("Attack"))
         {
-            ASourse.PlayOneShot(AttackSounds[Random.Range(0, AttackSounds.Length)]);
+            ASourсe.PlayOneShot(AttackSounds[Random.Range(0, AttackSounds.Length)]);
         }
         if (Anim.GetFloat("Speed") > 0.01f && isGrounded == true)
         {
-            ASourse.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
+            ASourсe.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
         }
         if (Anim.GetFloat("JumpVeloc") > 0.01f)
         {
-            ASourse.PlayOneShot(JumpSounds[Random.Range(0, JumpSounds.Length)]);
+            ASourсe.PlayOneShot(JumpSounds[Random.Range(0, JumpSounds.Length)]);
         }
         if (Anim.GetBool("ReceiveDamage"))
         {
-            ASourse.PlayOneShot(HitSounds[Random.Range(0, HitSounds.Length)]);
+            ASourсe.PlayOneShot(HitSounds[Random.Range(0, HitSounds.Length)]);
         }
     }
 
+    //void OnDrawGizmosSelected()      // показывает поле зрения игрока
+    //{    
+    //    Gizmos.color = Color.red;
+
+    //    _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+    //    _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
+
+    //    Gizmos.DrawLine(_currentPosition, _endPosition);
+    //}
+
     void OnDrawGizmosSelected()      // показывает поле зрения игрока
-    {    
-        Gizmos.color = Color.red;
+    {
+        Gizmos.color = Color.blue;
 
-        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
-        _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
-
-        Gizmos.DrawLine(_currentPosition, _endPosition);
+        Gizmos.DrawWireSphere(Feet.position, feetRadius);
     }
 }

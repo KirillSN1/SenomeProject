@@ -30,7 +30,7 @@ public class BackgroundMusic : MonoBehaviour
                 Instantiate(BackgroundSourcePrefab);
                 //MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/MainMenu1"));
             }
-            Debug.Log("null");
+           // Debug.Log("null");
         }
     }
 }
