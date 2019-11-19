@@ -4044,12 +4044,6 @@ MonoBehaviour:
   Speed: 4
   SightDistance: {fileID: 1650014109}
   JumpingVelocity: 8
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   IsAlive: 1
   isGrounded: 0
   KeyboardInput: 1
@@ -4260,6 +4254,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpButton: 32
   AttackButton: 101
+  JumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.029672625
+      outSlope: 0.029672625
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.28930604
+    - serializedVersion: 3
+      time: 1
+      value: 8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3.5790286
+      value: 0
+      inSlope: -0.040298674
+      outSlope: -0.040298674
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  JumpTime: 1
 --- !u!1001 &675057897
 PrefabInstance:
   m_ObjectHideFlags: 0

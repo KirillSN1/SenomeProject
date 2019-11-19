@@ -20,8 +20,6 @@ public class PlayerBehaviour : MonoBehaviour
     [Range(1, 10)]
     public float JumpingVelocity;
 
-    public AnimationCurve MovementCurve;
-
     public bool IsAlive = true;
     public bool isGrounded = false;
 

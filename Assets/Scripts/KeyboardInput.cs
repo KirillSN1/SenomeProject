@@ -9,6 +9,9 @@ public class KeyboardInput : MonoBehaviour
     public KeyCode AttackButton = KeyCode.E;
 
     private PlayerBehaviour _player;
+
+    public AnimationCurve JumpCurve;
+    public float JumpTime;
  
     void Start()
     {
@@ -42,6 +45,7 @@ public class KeyboardInput : MonoBehaviour
         {
             if (Input.GetKeyDown(JumpButton) && _player.isGrounded)
             {
+                _player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
                 _player.rb.velocity = Vector2.up * _player.JumpingVelocity;
             }
             if (_player.rb.velocity.y < 0)            //Ускорение падения
