@@ -8,18 +8,23 @@ public class GameManager : MonoBehaviour
 {  
     [Header("Level Headers")]
     public string MainMenuLevel = "StartMenu";
-    public string StartGameLevel = "Level1";
-    public string NextLevel = "Level1";
+    public string FirstLevel = "Level1";
+    public string NextLevel;
 
     [Header("Level Settings")]
     public bool CanBeatLevel = false;
+    public int BeatLevelScore = 0;
+    public GameObject MainCanvas;
+    public GameObject StartLevelCanvas;
+    public GameObject BeatLevelCanvas;
+
     public Text MainScoreCoinsText;
 
     public static GameManager Gm;             
     public GameObject Player;
 
-    public enum GameStates { OnMainMenu, Playing, Death, BeatLevel };
-    public GameStates GameState = GameStates.Playing;
+    public enum GameStates { OnMainMenu, StartLevel, LostLevel, BeatLevel };
+    public GameStates GameState = GameStates.OnMainMenu;
 
     [HideInInspector]
     public bool GameIsOver;
@@ -29,8 +34,6 @@ public class GameManager : MonoBehaviour
 
     private PlayerBehaviour _playerState;
     private int _scoreCoins = 0;
-
-    public string CurrentScane;
 
     void Awake()
     {
@@ -46,11 +49,26 @@ public class GameManager : MonoBehaviour
            Player = GameObject.FindGameObjectWithTag("Player");
            _playerState = Player.GetComponent<PlayerBehaviour>();
 
-            GameState = GameStates.Playing;
+           GameState = GameStates.StartLevel;
+
+            if (StartLevelCanvas)
+            {
+                StartLevelCanvas.SetActive(true);
+            }
+
+            if (CanBeatLevel)
+            {
+                BeatLevelCanvas.SetActive(false);
+            }
+
+            if(BeatLevelScore == 0)
+            {
+                BeatLevelScore = GameObject.FindGameObjectsWithTag("Coin").Length;
+            }
         }
         else
         {
-            GameState = GameStates.OnMainMenu;
+           GameState = GameStates.OnMainMenu;
         }       
     }
 
@@ -58,17 +76,25 @@ public class GameManager : MonoBehaviour
     {
         if(GameState != GameStates.OnMainMenu && !_playerState.IsAlive)
         {
-            GameState = GameStates.Death;
+           GameState = GameStates.LostLevel;
         }
 
-        switch(GameState)                                      
+        if (!GameIsOver)
         {
-            case GameStates.Death:                     // в случае смерти игрока, перезагружаем текущий уровень
+            if (CanBeatLevel && (_scoreCoins >= BeatLevelScore))
+            {  
+                SetBeatLevelState();
+            }
+        }
+
+        switch (GameState)                                      
+        {
+            case GameStates.LostLevel:                     // в случае смерти игрока, перезагружаем текущий уровень
                 SceneManager.LoadScene(CurrentLevel);
                 break;
 
-            case GameStates.BeatLevel:                 // в случае победы на уровне - загружаем следущий
-                SceneManager.LoadScene(NextLevel);
+            case GameStates.BeatLevel:                 
+                SetBeatLevelState();
                 break;
         }
 
@@ -83,4 +109,26 @@ public class GameManager : MonoBehaviour
             Debug.Log("Final Score: " + _scoreCoins);
         }
     }
+
+    void SetStartLevelState()
+    {
+        StartLevelCanvas.SetActive(true);
+    }
+
+    void SetBeatLevelState()         // в случае победы на уровне - загружаем BeatLevelCanvas
+    {
+        GameIsOver = true;
+        StartLevelCanvas.SetActive(false);
+        BeatLevelCanvas.SetActive(true);
+
+        var inputPanel = GameObject.FindGameObjectWithTag("InputPanel");
+        inputPanel.SetActive(false); 
+    }
+
+    public void CloseActivePanel(GameObject activeCanvas)
+    {
+        Debug.Log("Close " + activeCanvas.name);
+        activeCanvas.SetActive(false);
+    }
+
 }
