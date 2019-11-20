@@ -8,7 +8,7 @@ public class MenuButtons : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("Starting the game!");
-        SceneManager.LoadScene(GameManager.Gm.StartGameLevel);
+        SceneManager.LoadScene(GameManager.Gm.FirstLevel);
     }
 
     public void OpenTip()

@@ -39,7 +39,6 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip[] JumpSounds;
     public AudioClip[] HitSounds;
 
-
     [Header("Unity settings")]
 
     [Range(1, 1.3f)]
