@@ -181,15 +181,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenuLevel: StartMenu
-  StartGameLevel: Level1
+  FirstLevel: Level1
   NextLevel: Level1
   CanBeatLevel: 0
+  BeatLevelScore: 0
+  MainCanvas: {fileID: 0}
+  StartLevelCanvas: {fileID: 0}
+  BeatLevelCanvas: {fileID: 0}
   MainScoreCoinsText: {fileID: 0}
   Player: {fileID: 0}
   GameState: 0
   GameIsOver: 0
   CurrentLevel: 
-  CurrentScane: MainMenu
 --- !u!4 &103065341
 Transform:
   m_ObjectHideFlags: 0
@@ -218,13 +221,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundSourcePrefab: {fileID: 5162944342876257100, guid: 656d8b390dcf43d47b9359232ef79637,
     type: 3}
-  gameManager: {fileID: 103065340}
   curve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MainAudioSource: {fileID: 0}
 --- !u!1 &294314600
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,9 +910,9 @@ RectTransform:
   m_Father: {fileID: 294314601}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.43334886}
-  m_AnchorMax: {x: 0.5, y: 0.43334886}
-  m_AnchoredPosition: {x: 2, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2, y: -92}
   m_SizeDelta: {x: 580, y: 158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880600873
@@ -1189,9 +1192,9 @@ RectTransform:
   m_Father: {fileID: 294314601}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5957443}
-  m_AnchorMax: {x: 0.5, y: 0.5957443}
-  m_AnchoredPosition: {x: 2, y: 4.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2, y: 107.5}
   m_SizeDelta: {x: 580, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2096848182

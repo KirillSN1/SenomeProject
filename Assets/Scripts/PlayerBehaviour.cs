@@ -91,6 +91,8 @@ public class PlayerBehaviour : MonoBehaviour
             IsAlive = false;
         }
 
+        GetPlayerStates();               // при мерже - оставить эту строку
+
         if (State != PlayerStates.ReceivingDamage)
         {
             if (KeyboardInput)
@@ -104,7 +106,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         AnimationController();
-        GetPlayerStates();
     }
 
     public void GetPlayerStates()
@@ -252,6 +253,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         Anim.SetBool("IsGrounded", isGrounded);
+
+        if(GameManager.Gm.GameState == GameManager.GameStates.BeatLevel)
+        {
+            Anim.SetBool("LevelCompleted", true);
+        }
     }
 
     public void PlayAudioClipEvent()

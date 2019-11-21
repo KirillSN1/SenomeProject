@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Gm;             
     public GameObject Player;
 
-    public enum GameStates { OnMainMenu, StartLevel, LostLevel, BeatLevel };
+    public enum GameStates { OnMainMenu, Playing, LostLevel, BeatLevel };
     public GameStates GameState = GameStates.OnMainMenu;
 
     [HideInInspector]
-    public bool GameIsOver;
+    public bool GameIsOver = false;
 
     [HideInInspector]
     public string CurrentLevel;
@@ -48,8 +48,6 @@ public class GameManager : MonoBehaviour
         {
            Player = GameObject.FindGameObjectWithTag("Player");
            _playerState = Player.GetComponent<PlayerBehaviour>();
-
-           GameState = GameStates.StartLevel;
 
             if (StartLevelCanvas)
             {
@@ -74,16 +72,30 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(GameState != GameStates.OnMainMenu && !_playerState.IsAlive)
+        CurrentLevel = SceneManager.GetActiveScene().name;
+
+        if(CurrentLevel == MainMenuLevel)
         {
-           GameState = GameStates.LostLevel;
+            GameState = GameStates.OnMainMenu;
         }
 
-        if (!GameIsOver)
+        if (GameState != GameStates.OnMainMenu)
         {
-            if (CanBeatLevel && (_scoreCoins >= BeatLevelScore))
-            {  
-                SetBeatLevelState();
+            if(!_playerState.IsAlive)
+            {
+                GameState = GameStates.LostLevel;
+            }
+            else if(GameState != GameStates.BeatLevel)
+            {
+                GameState = GameStates.Playing;
+            }
+        }
+
+        if (GameState == GameStates.Playing && CanBeatLevel)
+        {
+            if (_scoreCoins >= BeatLevelScore)
+            {
+                GameState = GameStates.BeatLevel;
             }
         }
 
@@ -97,7 +109,6 @@ public class GameManager : MonoBehaviour
                 SetBeatLevelState();
                 break;
         }
-
     }
 
     public void Collect(int amount, string tag)
@@ -110,11 +121,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetStartLevelState()
-    {
-        StartLevelCanvas.SetActive(true);
-    }
-
     void SetBeatLevelState()         // в случае победы на уровне - загружаем BeatLevelCanvas
     {
         GameIsOver = true;
@@ -122,7 +128,11 @@ public class GameManager : MonoBehaviour
         BeatLevelCanvas.SetActive(true);
 
         var inputPanel = GameObject.FindGameObjectWithTag("InputPanel");
-        inputPanel.SetActive(false); 
+
+        if(inputPanel)     // проверяем, что панель ввода еще не отключена
+        {
+            inputPanel.SetActive(false);
+        }
     }
 
     public void CloseActivePanel(GameObject activeCanvas)
