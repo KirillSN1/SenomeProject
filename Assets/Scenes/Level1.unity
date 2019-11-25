@@ -4653,7 +4653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 5
   Attack: 1
-  Speed: 4
+  Speed: 0
   SightDistance: {fileID: 1650014109}
   JumpingVelocity: 8
   IsAlive: 1
@@ -4866,6 +4866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpButton: 32
   AttackButton: 101
+  AccelerationTime: 5
   JumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -15274,10 +15275,11 @@ MonoBehaviour:
   FirstLevel: Level1
   NextLevel: Level1
   CanBeatLevel: 1
-  BeatLevelScore: 1
+  BeatLevelScore: 0
   MainCanvas: {fileID: 394007891}
   StartLevelCanvas: {fileID: 1777536561}
   BeatLevelCanvas: {fileID: 2094152883}
+  InputClass: {fileID: 665896598}
   MainScoreCoinsText: {fileID: 665622203}
   Player: {fileID: 665896597}
   GameState: 1
