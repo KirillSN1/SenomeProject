@@ -9,10 +9,16 @@ public class KeyboardInput : MonoBehaviour
     public KeyCode AttackButton = KeyCode.E;
 
     private PlayerBehaviour _player;
+    private bool Acc;
+
+    private float AccelerationPower=4;
+    [Range(1,6)]
+    public float AccelerationTime=6f;
+    
 
     public AnimationCurve JumpCurve;
     public float JumpTime;
- 
+
     void Start()
     {
         _player = GetComponent<PlayerBehaviour>();
@@ -20,18 +26,31 @@ public class KeyboardInput : MonoBehaviour
 
     void Update()
     {
-        
+        if (Acc)
+        {
+            _player.Speed = Mathf.Lerp(_player.Speed, AccelerationPower, AccelerationTime * Time.deltaTime);
+        }
     }
 
     public void KeyboardWalkAndAttack()
     {
         _player.MInput = Input.GetAxisRaw("Horizontal");
 
-       if (Input.GetKeyDown(AttackButton))      // атаковать enemy
-       {
-           Debug.Log("Pressing E");
+        if (Input.GetKeyDown(AttackButton))      // атаковать enemy
+        {
+            Debug.Log("Pressing E");
             _player.DetectEnemy();
-       }
+        }
+        if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
+        {
+            Acc = true;
+        }
+        else
+        if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            Acc = false;
+            _player.Speed = 0f;
+        }
 
         _player.rb.velocity = new Vector2(_player.MInput * _player.Speed, _player.rb.velocity.y);
         _player.isGrounded = Physics2D.OverlapCircle(_player.Feet.position, _player.feetRadius, _player.Groundlayer);

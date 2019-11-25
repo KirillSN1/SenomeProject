@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject MainCanvas;
     public GameObject StartLevelCanvas;
     public GameObject BeatLevelCanvas;
+    public MobileInput InputClass;
 
     public Text MainScoreCoinsText;
 
@@ -131,6 +132,8 @@ public class GameManager : MonoBehaviour
 
         if(inputPanel)     // проверяем, что панель ввода еще не отключена
         {
+            InputClass.RightUp();
+            InputClass.LeftUp();
             inputPanel.SetActive(false);
         }
     }
