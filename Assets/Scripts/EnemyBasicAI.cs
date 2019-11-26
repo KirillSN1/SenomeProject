@@ -141,7 +141,7 @@ public class EnemyBasicAI : EnemySettings
 
         yield return null;
 
-        yield return new WaitForSeconds(.6f);    
+        yield return new WaitForSeconds(.2f);    
 
         if (Anim != null)
         {

@@ -40,7 +40,14 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Unity settings")]
 
     [Range(1, 1.3f)]
-    public float AccelerationValue = 1.066f;
+    public float FallAccelerationValue = 1.055f;
+    [HideInInspector]
+    public bool Acc;
+    [HideInInspector]
+    public float AccelerationPower = 4f;
+    [Range(1, 6)]
+    public float AccelerationTime = 6f;
+    [Space(25f)]
 
     public Transform Feet;
     public float feetRadius;
@@ -176,7 +183,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
             if (rb.velocity.y < 0) //Ускорение падения
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * AccelerationValue);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * FallAccelerationValue);
             }
         }
         else

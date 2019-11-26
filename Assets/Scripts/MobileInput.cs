@@ -33,25 +33,35 @@ public class MobileInput : MonoBehaviour
             MInput = 1;
         }
         main.MInput = MInput;
+        if (main.Acc)
+        {
+            main.Speed = Mathf.Lerp(main.Speed, main.AccelerationPower, main.AccelerationTime * Time.deltaTime);
+        }
     }
 
     public void LeftDown()
     {
         left = true;
+        main.Acc = true;
     }
     public void LeftUp()
     {
         left = false;
+        main.Acc = false;
+        main.Speed = 0f;
     }
 
     public void RightDown()
     {
-       right = true;
+        right = true;
+        main.Acc = true;
     }
 
     public void RightUp()
     {
         right = false;
+        main.Acc = false;
+        main.Speed = 0f;
     }
 
     public void Jump()

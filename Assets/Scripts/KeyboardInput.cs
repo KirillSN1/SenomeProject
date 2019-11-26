@@ -8,13 +8,7 @@ public class KeyboardInput : MonoBehaviour
     public KeyCode JumpButton = KeyCode.Space;
     public KeyCode AttackButton = KeyCode.E;
 
-    private PlayerBehaviour _player;
-    private bool Acc;
-
-    private float AccelerationPower=4;
-    [Range(1,6)]
-    public float AccelerationTime=6f;
-    
+    private PlayerBehaviour _player;    
 
     public AnimationCurve JumpCurve;
     public float JumpTime;
@@ -26,9 +20,9 @@ public class KeyboardInput : MonoBehaviour
 
     void Update()
     {
-        if (Acc)
+        if (_player.Acc)
         {
-            _player.Speed = Mathf.Lerp(_player.Speed, AccelerationPower, AccelerationTime * Time.deltaTime);
+            _player.Speed = Mathf.Lerp(_player.Speed, _player.AccelerationPower, _player.AccelerationTime * Time.deltaTime);
         }
     }
 
@@ -43,12 +37,12 @@ public class KeyboardInput : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
         {
-            Acc = true;
+            _player.Acc = true;
         }
         else
         if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
-            Acc = false;
+            _player.Acc = false;
             _player.Speed = 0f;
         }
 
@@ -69,7 +63,7 @@ public class KeyboardInput : MonoBehaviour
             }
             if (_player.rb.velocity.y < 0)            //Ускорение падения
             {
-                _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.AccelerationValue);
+                _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.FallAccelerationValue);
             }
         }
         else

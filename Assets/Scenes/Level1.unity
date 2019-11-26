@@ -743,6 +743,40 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 665896598}
+          m_MethodName: LeftDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 665896598}
+          m_MethodName: LeftUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &81730463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2570,40 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 665896598}
+          m_MethodName: RightUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 665896598}
+          m_MethodName: RightDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -4658,7 +4726,7 @@ MonoBehaviour:
   JumpingVelocity: 8
   IsAlive: 1
   isGrounded: 0
-  KeyboardInput: 1
+  KeyboardInput: 0
   MInput: 0
   FootstepsSounds:
   - {fileID: 8300000, guid: eeb5ff6bdd7768340ac9d649e37b9130, type: 3}
@@ -4678,9 +4746,12 @@ MonoBehaviour:
   HitSounds:
   - {fileID: 8300000, guid: 977ee454b7bddd448840c53abf7c1362, type: 3}
   - {fileID: 8300000, guid: b0282e5c60494f8459bdf320f53766ce, type: 3}
-  AccelerationValue: 1.055
+  FallAccelerationValue: 1.055
+  Acc: 0
+  AccelerationPower: 4
+  AccelerationTime: 6
   Feet: {fileID: 35473642}
-  feetRadius: 0.44
+  feetRadius: 0.4
   Groundlayer:
     serializedVersion: 2
     m_Bits: 256
@@ -4866,7 +4937,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpButton: 32
   AttackButton: 101
-  AccelerationTime: 5
   JumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -5828,10 +5898,10 @@ RectTransform:
   m_Father: {fileID: 394007896}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -101, y: -81.3}
-  m_SizeDelta: {x: 59, y: 53.3}
+  m_AnchorMin: {x: 0.9127292, y: 0.8838296}
+  m_AnchorMax: {x: 0.9674792, y: 0.9676592}
+  m_AnchoredPosition: {x: 0.00012207031, y: -0.000061035156}
+  m_SizeDelta: {x: -0.00013733, y: -0.00020599}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790506465
 MonoBehaviour:
@@ -18332,7 +18402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650014108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.287, y: -0.14, z: 0}
+  m_LocalPosition: {x: 0.261, y: -0.144, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 665896605}
