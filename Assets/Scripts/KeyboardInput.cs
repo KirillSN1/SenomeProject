@@ -35,6 +35,10 @@ public class KeyboardInput : MonoBehaviour
             Debug.Log("Pressing E");
             _player.DetectEnemy();
         }
+        if (Input.GetKey(AttackButton))
+        {
+            _player.Anim.SetTrigger("AttackButtonPresed");
+        }
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
         {
             _player.Acc = true;

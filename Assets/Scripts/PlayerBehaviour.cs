@@ -215,7 +215,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 if (target.CompareTag("Enemy"))   // игрок увидел противника
                 {
-                    StartCoroutine(AttackTheEnemy(target));           // атаковать противника
+                        StartCoroutine(AttackTheEnemy(target));           // атаковать противника
 
                     _knockBack.HitSomeObject(target);
                 }
@@ -229,6 +229,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator AttackTheEnemy(GameObject enemy)
     {
+        if (Anim.GetBool("Attack") == false)
         Anim.SetBool("Attack", true);
 
          yield return null;
