@@ -240,7 +240,7 @@ public class PlayerBehaviour : MonoBehaviour
             StartCoroutine(enemyBasicAI.ReceiveDamage(Attack));
         }
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(GetComponent<Animation>().clip.length);
 
         Anim.SetBool("Attack", false);
     }

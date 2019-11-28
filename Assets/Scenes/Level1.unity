@@ -4688,6 +4688,7 @@ GameObject:
   - component: {fileID: 665896606}
   - component: {fileID: 665896598}
   - component: {fileID: 665896607}
+  - component: {fileID: 665896608}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4749,7 +4750,7 @@ MonoBehaviour:
   FallAccelerationValue: 1.055
   Acc: 0
   AccelerationPower: 4
-  AccelerationTime: 6
+  AccelerationTime: 4
   Feet: {fileID: 35473642}
   feetRadius: 0.4
   Groundlayer:
@@ -4980,6 +4981,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   JumpTime: 1
+--- !u!111 &665896608
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665896597}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 134344414806d7f48a8c421b560677fd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 134344414806d7f48a8c421b560677fd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &675057897
 PrefabInstance:
   m_ObjectHideFlags: 0

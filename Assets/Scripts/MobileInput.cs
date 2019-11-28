@@ -71,7 +71,10 @@ public class MobileInput : MonoBehaviour
 
     public void Attack()
     {
-        main.DetectEnemy();
+        if (main.Anim.GetBool("Attack") == false)
+        {
+            main.DetectEnemy();
+        }
     }
 
 }

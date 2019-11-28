@@ -32,12 +32,11 @@ public class KeyboardInput : MonoBehaviour
 
         if (Input.GetKeyDown(AttackButton))      // атаковать enemy
         {
-            Debug.Log("Pressing E");
-            _player.DetectEnemy();
-        }
-        if (Input.GetKey(AttackButton))
-        {
-            _player.Anim.SetTrigger("AttackButtonPresed");
+            if (_player.Anim.GetBool("Attack") == false)
+            {
+                Debug.Log("Pressing E");
+                _player.DetectEnemy();
+            }
         }
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
         {
