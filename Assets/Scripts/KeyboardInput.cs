@@ -8,7 +8,7 @@ public class KeyboardInput : MonoBehaviour
     public KeyCode JumpButton = KeyCode.Space;
     public KeyCode AttackButton = KeyCode.E;
 
-    private PlayerBehaviour _player;    
+    private PlayerBehaviour _player;
 
     public AnimationCurve JumpCurve;
     public float JumpTime;
@@ -20,9 +20,16 @@ public class KeyboardInput : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+            _player.runDir = _player.MInput;
+
         if (_player.Acc)
         {
             _player.Speed = Mathf.Lerp(_player.Speed, _player.AccelerationPower, _player.AccelerationTime * Time.deltaTime);
+        }
+        else
+        {
+            _player.Speed = Mathf.Lerp(_player.Speed, 0f, _player.DecelerationTime * Time.deltaTime);
         }
     }
 
@@ -46,10 +53,16 @@ public class KeyboardInput : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             _player.Acc = false;
-            _player.Speed = 0f;
+            //_player.Speed = 0f;
         }
-
-        _player.rb.velocity = new Vector2(_player.MInput * _player.Speed, _player.rb.velocity.y);
+        if (_player.Acc)
+        {
+            _player.rb.velocity = new Vector2(_player.MInput * _player.Speed, _player.rb.velocity.y);
+        }
+        else
+        {
+            _player.rb.velocity = new Vector2(_player.runDir * _player.Speed, _player.rb.velocity.y);
+        }
         _player.isGrounded = Physics2D.OverlapCircle(_player.Feet.position, _player.feetRadius, _player.Groundlayer);
 
         KeyboardJump();

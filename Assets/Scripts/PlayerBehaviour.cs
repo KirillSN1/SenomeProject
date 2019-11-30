@@ -23,9 +23,13 @@ public class PlayerBehaviour : MonoBehaviour
     public bool IsAlive = true;
     public bool isGrounded = false;
 
+    [Header("Enemy Settings")]
+    [Range(0, 1)]
+    public float DamageTime;
+
     [Header("Input Settings")]
- //   public KeyCode JumpButton = KeyCode.Space;
-  //  public KeyCode AttackButton = KeyCode.E;
+    //   public KeyCode JumpButton = KeyCode.Space;
+    //  public KeyCode AttackButton = KeyCode.E;
     public bool KeyboardInput = false;          //Управление с клавиатуры
 
     [HideInInspector]
@@ -47,6 +51,10 @@ public class PlayerBehaviour : MonoBehaviour
     public float AccelerationPower = 4f;
     [Range(1, 6)]
     public float AccelerationTime = 6f;
+    [Range(1, 6)]
+    public float DecelerationTime = 6f;
+    [HideInInspector]
+    public float runDir;
     [Space(25f)]
 
     public Transform Feet;
@@ -169,7 +177,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Walk()
     {
-        rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
+        if (Acc)
+        {
+            rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(runDir * Speed, rb.velocity.y);
+        }
+        
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
     }
 
@@ -233,7 +249,7 @@ public class PlayerBehaviour : MonoBehaviour
         Anim.SetBool("Attack", true);
 
          yield return null;
-
+        yield return new WaitForSeconds(GetComponent<Animation>().clip.length*DamageTime);
         if (enemy != null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
         {
             var enemyBasicAI = enemy.GetComponent<EnemyBasicAI>();
@@ -244,7 +260,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         Anim.SetBool("Attack", false);
     }
-
 
     public void AnimationController()
     {

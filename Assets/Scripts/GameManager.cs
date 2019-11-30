@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private PlayerBehaviour _playerState;
     private int _scoreCoins = 0;
+    private int CurrentCount;
 
     void Awake()
     {
@@ -44,8 +45,9 @@ public class GameManager : MonoBehaviour
         }
 
         CurrentLevel = SceneManager.GetActiveScene().name;
+        MainScoreCoinsText.text = "X  " + _scoreCoins.ToString() + "/" + GameObject.FindGameObjectsWithTag("Coin").Length;
 
-        if(CurrentLevel != MainMenuLevel)
+        if (CurrentLevel != MainMenuLevel)
         {
            Player = GameObject.FindGameObjectWithTag("Player");
            _playerState = Player.GetComponent<PlayerBehaviour>();
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CurrentLevel = SceneManager.GetActiveScene().name;
+        CurrentCount = GameObject.FindGameObjectsWithTag("Coin").Length-1;
 
         if(CurrentLevel == MainMenuLevel)
         {
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
         if(tag == "Coin")
         {
             _scoreCoins += amount;
-            MainScoreCoinsText.text = "X  " + _scoreCoins.ToString();
+            MainScoreCoinsText.text = "X  " + _scoreCoins.ToString()+"/"+CurrentCount.ToString();
             Debug.Log("Final Score: " + _scoreCoins);
         }
     }

@@ -37,31 +37,37 @@ public class MobileInput : MonoBehaviour
         {
             main.Speed = Mathf.Lerp(main.Speed, main.AccelerationPower, main.AccelerationTime * Time.deltaTime);
         }
+        else
+        {
+            main.Speed = Mathf.Lerp(main.Speed, 0f, main.DecelerationTime * Time.deltaTime);
+        }
     }
 
     public void LeftDown()
     {
         left = true;
         main.Acc = true;
+        main.runDir = main.MInput;
     }
     public void LeftUp()
     {
         left = false;
         main.Acc = false;
-        main.Speed = 0f;
+        main.runDir = main.MInput;
     }
 
     public void RightDown()
     {
         right = true;
         main.Acc = true;
+        main.runDir = main.MInput;
     }
 
     public void RightUp()
     {
         right = false;
         main.Acc = false;
-        main.Speed = 0f;
+        main.runDir = main.MInput;
     }
 
     public void Jump()
