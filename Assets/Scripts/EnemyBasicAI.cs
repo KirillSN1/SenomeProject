@@ -23,6 +23,8 @@ public class EnemyBasicAI : EnemySettings
     private KnockBack _knockBack;
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
+    private float distanceToTarget;
+    private SpriteRenderer FlipX;
 
     [Header("Audio Settings")]
     private AudioSource EnemyAudioSource;
@@ -45,6 +47,8 @@ public class EnemyBasicAI : EnemySettings
         leftSightPoint.gameObject.SetActive(false);
 
         EnemyAudioSource = GetComponentInParent<AudioSource>();
+
+        FlipX = GetComponent<SpriteRenderer>();
     }
 
 
@@ -163,13 +167,21 @@ public class EnemyBasicAI : EnemySettings
         var distanceToHome = Vector3.Distance(transform.position, toHomePosition);
 
         var toTarget = new Vector3(Target.position.x, transform.position.y, 0);
-        var distanceToTarget = Vector3.Distance(transform.position, Target.position);
+        distanceToTarget = Vector3.Distance(transform.position, Target.position);
      //   var distanceToTarget = Vector3.Distance(transform.position, toTarget);
 
         if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования, а враг на HomePosition  && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
+            if (transform.position.x < Target.transform.position.x)       //Поворот врага в сторону гг 
+            {
+                FlipX.flipX = false;
+            }
+            if (transform.position.x > Target.transform.position.x)
+            {
+                FlipX.flipX = true;
+            }
 
             AnimateRunning(toTarget);
         }
@@ -177,6 +189,14 @@ public class EnemyBasicAI : EnemySettings
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
+            if (toHomePosition.x < transform.position.x)   
+            {
+                FlipX.flipX = true;
+            }
+            if (toHomePosition.x > transform.position.x)
+            {
+                FlipX.flipX = false;
+            }
 
             AnimateRunning(toHomePosition);
         }
