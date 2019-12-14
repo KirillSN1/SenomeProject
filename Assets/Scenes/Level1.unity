@@ -4728,7 +4728,7 @@ MonoBehaviour:
   IsAlive: 1
   isGrounded: 0
   DamageTime: 0.5
-  KeyboardInput: 1
+  KeyboardInput: 0
   MInput: 0
   FootstepsSounds:
   - {fileID: 8300000, guid: eeb5ff6bdd7768340ac9d649e37b9130, type: 3}
@@ -15365,7 +15365,7 @@ MonoBehaviour:
   FirstLevel: Level1
   NextLevel: Level1
   CanBeatLevel: 1
-  BeatLevelScore: 1
+  BeatLevelScore: 0
   MainCanvas: {fileID: 394007891}
   StartLevelCanvas: {fileID: 1777536561}
   BeatLevelCanvas: {fileID: 2094152883}
@@ -15412,6 +15412,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MainAudioSource: {fileID: 0}
   GameMusic: 0
+  Victory: 0
 --- !u!1 &1060316245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9114093158242493679, guid: c43d50816dc6a114a97b8ba0f6569d71,
