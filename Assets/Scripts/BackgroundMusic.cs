@@ -4,14 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BackgroundMusic : MonoBehaviour
-{  
+{
     public GameObject BackgroundSourcePrefab;
-  //  public GameManager gameManager;
+    public GameManager gameManager;
     public AnimationCurve curve;
     public AudioSource MainAudioSource;
 
+    public bool GameMusic;
+    public bool Victory;
+
     void Awake()
     {
+        gameManager = GetComponent<GameManager>();
+
         if (GameObject.FindGameObjectWithTag("MainAudioSource") == null)
         {
             if (GameManager.Gm.CurrentLevel == GameManager.Gm.FirstLevel)
@@ -21,6 +26,8 @@ public class BackgroundMusic : MonoBehaviour
 
                 MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/Game1"));
                 DontDestroyOnLoad(MainAudioSource);
+
+                GameMusic = true;
             }
             if (GameManager.Gm.CurrentLevel == GameManager.Gm.MainMenuLevel)
             {
@@ -42,5 +49,31 @@ public class BackgroundMusic : MonoBehaviour
             //    //MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/MainMenu1"));
             //}
         }
+
+        
     }
+    void Update()
+    {
+        VictorySound();
+    }
+
+    void VictorySound()
+    {
+        if (gameManager.GameState == GameManager.GameStates.BeatLevel)
+        {
+            if (GameMusic)
+            {
+                MainAudioSource.Stop();
+                GameMusic = false;
+                Victory = true;
+            } 
+        }
+        if (Victory)
+            {
+                MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/Victory0")); //Звук победы
+                Victory = false;
+            }
+
+    }
+
 }

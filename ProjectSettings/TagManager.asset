@@ -13,6 +13,7 @@ TagManager:
   - MainAudioSource
   - EnemyAttackRadius
   - InputPanel
+  - CoinSource
   layers:
   - Default
   - TransparentFX

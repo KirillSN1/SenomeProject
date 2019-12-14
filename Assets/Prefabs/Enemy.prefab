@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1829401115}
   - component: {fileID: 1829401116}
   - component: {fileID: 2516001182804754693}
+  - component: {fileID: 7644064061156102162}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -305,6 +306,7 @@ MonoBehaviour:
   IsAlive: 1
   Health: 5
   ChaseRadius: 3
+  ChaseOffset: 1.15
   HomePosition: {x: 7.88, y: -2.25, z: 0}
   SightDistance: {fileID: 2994152720005344087}
   TimeBetweenAttack: 1
@@ -313,7 +315,10 @@ MonoBehaviour:
   Anim: {fileID: 1829401115}
   EnemyState: 0
   HitSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 536bae8a0f3893942bc9bcc1ab319469, type: 3}
+  - {fileID: 8300000, guid: 8b78cbbb80e64d746b2a1fbad3782ebe, type: 3}
+  - {fileID: 8300000, guid: d508474b1d4a22b468b02541336bd305, type: 3}
+  - {fileID: 8300000, guid: 7e5d4150406d812449849981cda4f02c, type: 3}
 --- !u!114 &2516001182804754693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +333,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnockBackSpeed: 5
   KnockTime: 0.25
+--- !u!114 &7644064061156102162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607642191974079391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83254a33515f10d439cf3e9160126926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumCoins: 1
+  timeout: 1
+  CoinPrefab: {fileID: 4145093559926449429, guid: af6f562b7e010ab4a966a23beac21ce0,
+    type: 3}
 --- !u!1 &1607642192232262246
 GameObject:
   m_ObjectHideFlags: 0

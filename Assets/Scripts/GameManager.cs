@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
             InputClass.LeftUp();
             inputPanel.SetActive(false);
         }
+        //Воспроизведение звука победы в Background Music
     }
 
     public void CloseActivePanel(GameObject activeCanvas)

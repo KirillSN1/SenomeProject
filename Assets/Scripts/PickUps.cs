@@ -6,13 +6,6 @@ public class PickUps : MonoBehaviour
 {
     public int Value = 1;
 
-    private AudioSource CoinSource;
-
-    private void Start()
-    {
-        CoinSource = GetComponentInParent<AudioSource>();
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -34,6 +27,6 @@ public class PickUps : MonoBehaviour
 
     void PlayAudio()
     {
-        CoinSource.PlayOneShot(Resources.Load<AudioClip>("CoinsSound/Coin1"));
+        GetComponentInParent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("CoinsSound/Coin1"));
     }
 }

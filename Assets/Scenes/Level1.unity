@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 105053120}
   m_Layer: 0
   m_Name: PickUps(AudioSource)
-  m_TagString: Untagged
+  m_TagString: CoinSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4728,7 +4728,7 @@ MonoBehaviour:
   IsAlive: 1
   isGrounded: 0
   DamageTime: 0.5
-  KeyboardInput: 0
+  KeyboardInput: 1
   MInput: 0
   FootstepsSounds:
   - {fileID: 8300000, guid: eeb5ff6bdd7768340ac9d649e37b9130, type: 3}
@@ -15365,7 +15365,7 @@ MonoBehaviour:
   FirstLevel: Level1
   NextLevel: Level1
   CanBeatLevel: 1
-  BeatLevelScore: 0
+  BeatLevelScore: 1
   MainCanvas: {fileID: 394007891}
   StartLevelCanvas: {fileID: 1777536561}
   BeatLevelCanvas: {fileID: 2094152883}
@@ -15403,6 +15403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundSourcePrefab: {fileID: 1482435582634098486, guid: c27ba767bbd65fb44a8ea7730e2a757a,
     type: 3}
+  gameManager: {fileID: 0}
   curve:
     serializedVersion: 2
     m_Curve: []
@@ -15410,6 +15411,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MainAudioSource: {fileID: 0}
+  GameMusic: 0
 --- !u!1 &1060316245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9114093158242493679, guid: c43d50816dc6a114a97b8ba0f6569d71,
@@ -22622,29 +22624,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HitSounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 665896605}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HitSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 536bae8a0f3893942bc9bcc1ab319469, type: 3}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HitSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8b78cbbb80e64d746b2a1fbad3782ebe, type: 3}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HitSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: d508474b1d4a22b468b02541336bd305, type: 3}
-    - target: {fileID: 1829401116, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
-      propertyPath: HitSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7e5d4150406d812449849981cda4f02c, type: 3}
     - target: {fileID: 2994152720005344087, guid: f082952f754c07f40bb19c7d436322e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22670,6 +22652,11 @@ PrefabInstance:
     - target: {fileID: 1829401117, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.42666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185491223987899409, guid: f082952f754c07f40bb19c7d436322e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f082952f754c07f40bb19c7d436322e8, type: 3}

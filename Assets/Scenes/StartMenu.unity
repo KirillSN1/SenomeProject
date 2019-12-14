@@ -188,6 +188,7 @@ MonoBehaviour:
   MainCanvas: {fileID: 0}
   StartLevelCanvas: {fileID: 0}
   BeatLevelCanvas: {fileID: 0}
+  InputClass: {fileID: 0}
   MainScoreCoinsText: {fileID: 0}
   Player: {fileID: 0}
   GameState: 0
@@ -912,8 +913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -92}
-  m_SizeDelta: {x: 580, y: 158}
+  m_AnchoredPosition: {x: 2, y: -95.1}
+  m_SizeDelta: {x: 580, y: 164.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880600873
 MonoBehaviour:

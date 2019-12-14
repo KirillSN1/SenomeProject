@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemyBasicAI : EnemySettings
 {
     [Header("AI Settings")]
+    [Range(1,5)]
     public float ChaseRadius = 5f;          // радиус преследования
+    [Range(1,1.15f)]
+    public float ChaseOffset = 1f;          // радиус прекращения преследования
     public Vector3 HomePosition;             // позиция, куда возвращается враг, если игрок вышел за пределы ChaseRadius
     public Transform SightDistance;         // поле зрения врага
 
@@ -170,7 +173,7 @@ public class EnemyBasicAI : EnemySettings
         distanceToTarget = Vector3.Distance(transform.position, Target.position);
      //   var distanceToTarget = Vector3.Distance(transform.position, toTarget);
 
-        if (distanceToTarget <= ChaseRadius)  // игрок в зоне преследования, а враг на HomePosition  && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0
+        if (distanceToTarget <= ChaseRadius && distanceToTarget >= ChaseOffset)   // игрок в зоне преследования, а враг на HomePosition  && distanceToHome == 0 || distanceToTarget <= ChaseRadius && distanceToHome != 0
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toTarget, Speed * Time.deltaTime);
