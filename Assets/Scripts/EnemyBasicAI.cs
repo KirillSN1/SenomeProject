@@ -192,7 +192,7 @@ public class EnemyBasicAI : EnemySettings
         {
             EnemyState = EnemyStates.Running;
             transform.position = Vector3.MoveTowards(transform.position, toHomePosition, Speed * Time.deltaTime);
-            if (toHomePosition.x < transform.position.x)   
+            if (toHomePosition.x < transform.position.x)
             {
                 FlipX.flipX = true;
             }
@@ -207,7 +207,7 @@ public class EnemyBasicAI : EnemySettings
         {
             EnemyState = EnemyStates.Idling;
             Anim.SetBool("isRunningEnemy", false);      // idle state
-        }  
+        }
     }
 
     private void AnimateRunning(Vector3 target)

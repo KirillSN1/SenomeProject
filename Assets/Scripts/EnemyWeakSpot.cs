@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class EnemyWeakSpot : MonoBehaviour
 {
-    public float TimeToReturnToNormal = 1.5f;
-    private float _timeLeft;
+    public bool _playerOnHead;
+    private GameObject Player;
+    private Vector2 Direction;
 
-    private bool _playerOnHead;
-    private Vector3 _scale;
-    private Vector3 _position;
+    public float x = 200;
+    public float y = 10;
+    private float a;
 
     void Start()
     {
-        _scale = transform.parent.localScale;
-        _position = transform.parent.localPosition;
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void FixedUpdate()
     {
-        if (!_playerOnHead)
+
+        Direction = new Vector2(a, y);
+        if (_playerOnHead)
         {
-            _timeLeft -= Time.deltaTime;
-            ReturnToNormal();
+            if (Player.transform.position.x > gameObject.transform.position.x)
+            {
+                a = x;
+            }
+            else
+            {
+                a = -x;
+            }
+            Player.GetComponent<Rigidbody2D>().AddForce(Direction);
         }
     }
 
@@ -30,26 +39,20 @@ public class EnemyWeakSpot : MonoBehaviour
     {
         if (obj.gameObject.CompareTag("Player"))
         {
-            var playerBehaviour = obj.GetComponent<PlayerBehaviour>();
-
             _playerOnHead = true;
-            transform.parent.localScale = new Vector3(_scale.x, _scale.y / 2, _scale.z);
-            _timeLeft = TimeToReturnToNormal;
-
-           // obj.gameObject.GetComponent<Rigidbody2D>().velocity = obj.transform.right;
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        _playerOnHead = false; 
+        StartCoroutine(ForceOff());
     }
 
-    private void ReturnToNormal()
+    IEnumerator ForceOff()
     {
-        if (_timeLeft <= 0)
-        {
-            transform.parent.localScale = _scale;
-        }
+        yield return new WaitForSeconds(0.5f);
+        _playerOnHead = false;
     }
+
+
 }
