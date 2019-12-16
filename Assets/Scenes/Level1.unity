@@ -4728,7 +4728,7 @@ MonoBehaviour:
   IsAlive: 1
   isGrounded: 0
   DamageTime: 0.5
-  KeyboardInput: 0
+  KeyboardInput: 1
   MInput: 0
   FootstepsSounds:
   - {fileID: 8300000, guid: eeb5ff6bdd7768340ac9d649e37b9130, type: 3}
@@ -22646,6 +22646,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866101773, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185491223987899409, guid: f082952f754c07f40bb19c7d436322e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1829401117, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.85333335
@@ -22653,11 +22662,6 @@ PrefabInstance:
     - target: {fileID: 1829401117, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.42666668
-      objectReference: {fileID: 0}
-    - target: {fileID: 6185491223987899409, guid: f082952f754c07f40bb19c7d436322e8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f082952f754c07f40bb19c7d436322e8, type: 3}
