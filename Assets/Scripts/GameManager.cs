@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         if(tag == "Coin")
         {
             _scoreCoins += amount;
-            MainScoreCoinsText.text = "X  " + _scoreCoins.ToString()+"/"+CurrentCount.ToString();
+            MainScoreCoinsText.text = "X  " + _scoreCoins.ToString();
             Debug.Log("Final Score: " + _scoreCoins);
         }
     }
