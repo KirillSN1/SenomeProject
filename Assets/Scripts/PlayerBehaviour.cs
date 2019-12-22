@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int Attack = 1;
     public float Speed = 4;
     public Transform SightDistance;    // поле зрения игрока
-
+    
     [Range(1, 10)]
     public float JumpingVelocity;
 
@@ -74,6 +75,8 @@ public class PlayerBehaviour : MonoBehaviour
     private float scale;
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
+    
+    
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
 
@@ -220,9 +223,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
         _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
-
         var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
-
+       
         foreach (var obj in hits)
         {
             var target = obj.collider.gameObject;

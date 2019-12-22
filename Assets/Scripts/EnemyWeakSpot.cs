@@ -7,14 +7,15 @@ public class EnemyWeakSpot : MonoBehaviour
     public bool _playerOnHead;
     private GameObject Player;
     private Vector2 Direction;
-
-    public float x = 200;
-    public float y = 10;
+    private EnemyBasicAI enemyBasicAI;
+    public float x = 1;
+    public float y = 100;
     private float a;
 
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        enemyBasicAI = this.transform.parent.gameObject.GetComponent(typeof (EnemyBasicAI)) as EnemyBasicAI;
     }
 
     private void FixedUpdate()
@@ -31,7 +32,7 @@ public class EnemyWeakSpot : MonoBehaviour
             {
                 a = -x;
             }
-            Player.GetComponent<Rigidbody2D>().AddForce(Direction);
+            Player.GetComponent<Rigidbody2D>().AddForce(Direction, ForceMode2D.Force);
         }
     }
 
@@ -40,12 +41,15 @@ public class EnemyWeakSpot : MonoBehaviour
         if (obj.gameObject.CompareTag("Player"))
         {
             _playerOnHead = true;
+            
+            enemyBasicAI.StartCoroutine(enemyBasicAI.ReceiveDamage(1));
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(ForceOff());
+        //StartCoroutine(ForceOff());
+         _playerOnHead = false;
     }
 
     IEnumerator ForceOff()
