@@ -36,7 +36,7 @@ public class EnemyBasicAI : EnemySettings
     void Awake()
     {
         _knockBack = GetComponent<KnockBack>();
-
+        
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         Anim = GetComponent<Animator>();
 

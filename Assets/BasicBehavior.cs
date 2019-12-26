@@ -10,25 +10,23 @@ public class BasicBehavior : MonoBehaviour
     Vector2 _endPosition;
     string state;
     string currentDirection = "Left";
-    public UnityEngine.Transform SightDistance;
-    
-    void Awake()
-    {
-       
-    }
+    public UnityEngine.Transform SightDistanceRight;
+    public UnityEngine.Transform SightDistanceLeft;
+    private UnityEngine.Transform SightDistance;
+   
     // Start is called before the first frame update
     void Start()
     {
-       
        a  = GetComponent(typeof(UnityArmatureComponent)) as UnityArmatureComponent;
        a.animation.Play("Idle_Animation");
+       chooseDirection(null);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-         _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
+        _currentPosition = new Vector2(transform.position.x, SightDistance.position.y);
         _endPosition = new Vector2(SightDistance.position.x, SightDistance.position.y);
 
         var hits = Physics2D.LinecastAll(_currentPosition, _endPosition);
@@ -39,17 +37,18 @@ public class BasicBehavior : MonoBehaviour
             if (target.CompareTag("Player"))   // игрок увидел противника
             {   
                 state = "run";
-                chooseDirection(target);
+                
                 Walk();   
             }
         }
-        if (hits.Length == 1)
+        if (hits.Length == 2)
         {
             chooseDirection(null);
             state = "idle";
         }
 
         playAnimationByState(state);
+        
     }
 
     void playAnimationByState(string state)
@@ -64,6 +63,10 @@ public class BasicBehavior : MonoBehaviour
             if (a.animation.lastAnimationName != "Walk_Animation")
                 a.animation.Play("Walk_Animation");
             break;
+            case "attack":
+            if (a.animation.lastAnimationName != "Attack_Animation")
+                a.animation.Play("Attack_Animation");
+            break;
         }
     }
 
@@ -75,7 +78,7 @@ public class BasicBehavior : MonoBehaviour
         a.transform.Translate(Vector2.right*Time.deltaTime);
     }
 
-    void chooseDirection(GameObject target)
+    public void chooseDirection(GameObject target)
     {
         if (target != null && target.transform.position.x <= a.transform.position.x)
         currentDirection = "left";
@@ -84,16 +87,22 @@ public class BasicBehavior : MonoBehaviour
 
         if (currentDirection == "left")
         {
+            SightDistance = SightDistanceLeft;
             a.armature.flipX = true;
         }
         else if (currentDirection == "right")
         {
+            SightDistance = SightDistanceRight;
             a.armature.flipX = false; 
         }
     }
 
-    void Attack(GameObject target)
-    {
 
+    public void Attack(GameObject target)
+    {
+        state = "attack";
+        playAnimationByState(state);
+        var pb = target.GetComponent<PlayerBehaviour>();
+        pb.StartCoroutine(pb.ReceiveDamage(1));
     }
 }
