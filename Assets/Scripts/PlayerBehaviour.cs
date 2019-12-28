@@ -250,13 +250,19 @@ public class PlayerBehaviour : MonoBehaviour
         if (Anim.GetBool("Attack") == false)
         Anim.SetBool("Attack", true);
 
-         yield return null;
+        yield return null;
         yield return new WaitForSeconds(GetComponent<Animation>().clip.length*DamageTime);
-        if (enemy != null)     // если врага нет - в методе просто проигрывается анимация взмаха меча
+        
+        if (enemy != null )     // если врага нет - в методе просто проигрывается анимация взмаха меча
         {
             var enemyBasicAI = enemy.GetComponent<EnemyBasicAI>();
+            var enemyBasicBeh = enemy.GetComponent<BasicBehavior>();
+            if (enemyBasicAI != null)
             StartCoroutine(enemyBasicAI.ReceiveDamage(Attack));
+            else
+            StartCoroutine(enemyBasicBeh.ReceiveDamage(Attack));
         }
+        
 
         yield return new WaitForSeconds(GetComponent<Animation>().clip.length);
 

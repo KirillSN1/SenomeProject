@@ -6,6 +6,9 @@ using DragonBones;
 public class BasicBehavior : MonoBehaviour
 {
     UnityArmatureComponent a;
+    bool isAttacking = false;
+    public int Health = 5;
+    int speed = 0;
     Vector2 _currentPosition;
     Vector2 _endPosition;
     string state;
@@ -13,10 +16,11 @@ public class BasicBehavior : MonoBehaviour
     public UnityEngine.Transform SightDistanceRight;
     public UnityEngine.Transform SightDistanceLeft;
     private UnityEngine.Transform SightDistance;
-   
+    PlayerBehaviour pb;
     // Start is called before the first frame update
     void Start()
     {
+        
        a  = GetComponent(typeof(UnityArmatureComponent)) as UnityArmatureComponent;
        a.animation.Play("Idle_Animation");
        chooseDirection(null);
@@ -34,19 +38,14 @@ public class BasicBehavior : MonoBehaviour
         {
             var target = obj.collider.gameObject;
 
-            if (target.CompareTag("Player"))   // игрок увидел противника
+            if (target.CompareTag("Player"))   // противник увидел игрока
             {   
-                state = "run";
-                
-                Walk();   
+                if (!isAttacking)
+                    Walk();       
             }
         }
-        if (hits.Length == 2)
-        {
-            chooseDirection(null);
-            state = "idle";
-        }
-
+        if (hits.Length == 3)
+            Idle();
         playAnimationByState(state);
         
     }
@@ -71,11 +70,26 @@ public class BasicBehavior : MonoBehaviour
     }
 
     void Walk()
-    {  
+    {   
+        var rb = GetComponent(typeof (Rigidbody2D)) as Rigidbody2D;
+        rb.constraints = RigidbodyConstraints2D.None;
+        state = "run";
+        
         if (currentDirection == "left")
         a.transform.Translate(Vector2.left*Time.deltaTime);
         else if (currentDirection == "right")
         a.transform.Translate(Vector2.right*Time.deltaTime);
+    }
+
+    public void Idle()
+    {
+        
+        var rb = GetComponent(typeof (Rigidbody2D)) as Rigidbody2D;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        isAttacking = false;
+        state = "idle";
+        chooseDirection(null);
+        playAnimationByState(state);
     }
 
     public void chooseDirection(GameObject target)
@@ -97,12 +111,38 @@ public class BasicBehavior : MonoBehaviour
         }
     }
 
-
-    public void Attack(GameObject target)
+    public IEnumerator ReceiveDamage(int amount)
     {
-        state = "attack";
+        Health -= amount;
+        
+
+        Debug.Log("Enemy got hit!");
+        
+        yield return null;
+
+        yield return new WaitForSeconds(.2f);    
+
+        state = "idle";
         playAnimationByState(state);
-        var pb = target.GetComponent<PlayerBehaviour>();
+
+        if (gameObject != null && Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+        yield return null;
+    }
+    
+    public IEnumerator Attack(GameObject target)
+    {
+        isAttacking = true;
+        state = "attack";
+        yield return null;
+        pb = target.GetComponent(typeof (PlayerBehaviour)) as PlayerBehaviour;
         pb.StartCoroutine(pb.ReceiveDamage(1));
+        yield return new WaitForSeconds(1000.0f);
+        isAttacking = false;
+        state = "idle";
+        yield return null;
     }
 }
