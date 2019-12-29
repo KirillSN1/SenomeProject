@@ -5,28 +5,39 @@ using UnityEngine;
 public class HurtBoxBasic : MonoBehaviour
 {
     BasicBehavior bb;
-    public float TimeBetweenAttack = .5f;  
+    Vector2 _currentPosition;
+    Vector2 _endPosition;
+    public float TimeBetweenAttack = 1.5f;  
     public float TimeTillAttack    = 0.0f;
-
+    public UnityEngine.Transform SightDistance;
+    Collider2D player;
+    Collider2D me;
+    bool isAttacking = false;
     void Awake()
     {
         bb = transform.parent.gameObject.GetComponent(typeof (BasicBehavior)) as BasicBehavior;
+        
     }
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Player")){
+
+   
+    void OnTriggerStay2D(Collider2D other) {
+        if (other.CompareTag("Player"))    
+        {
             if (TimeTillAttack <= 0)
             {
-                TimeTillAttack = TimeBetweenAttack;
                 StartCoroutine(bb.Attack(other.gameObject));
+                TimeTillAttack = TimeBetweenAttack;
             }
             TimeTillAttack -= Time.deltaTime;
-            
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        TimeTillAttack = TimeBetweenAttack;
-        bb.Idle();
-    }
+   
+     private void OnTriggerExit2D(Collider2D other) {
+     if (other.CompareTag("Player"))    
+        {
+            TimeTillAttack = TimeBetweenAttack;
+            bb.Idle();
+        }    
+     }
     
 }
