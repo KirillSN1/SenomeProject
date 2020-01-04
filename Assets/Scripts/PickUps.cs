@@ -14,7 +14,7 @@ public class PickUps : MonoBehaviour
             {
                 Debug.Log("Gm is here");
                 GameManager.Gm.Collect(Value, gameObject.tag);     // передаем тег собранного лута
-                PlayAudio();
+                //PlayAudio();
             }
             else
             {

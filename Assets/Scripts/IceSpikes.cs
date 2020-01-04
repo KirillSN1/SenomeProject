@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class IceSpikes : MonoBehaviour
 {
-    public float TimeBetweenAttack = .2f;
+    public float TimeBetweenAttack = .02f;
     public float TimeTillAttack;
     public int DamageAmount = 1;
-
+    public KnockBack _knockBack;
     public bool IsOnSpike = false;
 
     void Start()
@@ -33,6 +33,12 @@ public class IceSpikes : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            TimeTillAttack = 0;
+        }   
+    }
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -51,7 +57,8 @@ public class IceSpikes : MonoBehaviour
     {
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
         StartCoroutine(player.ReceiveDamage(DamageAmount));
-
+        
+        
         TimeTillAttack = TimeBetweenAttack;      
     }
 }

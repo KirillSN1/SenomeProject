@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int Attack = 1;
     public float Speed = 4;
     public Transform SightDistance;    // поле зрения игрока
-    
+    public Transform Platform;
     [Range(1, 10)]
     public float JumpingVelocity;
 
@@ -161,12 +161,13 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    
     public IEnumerator ReceiveDamage(int takenDamage)
     {
         Anim.SetBool("ReceiveDamage", true);
         Health -= takenDamage;
         transform.GetComponent<Renderer>().material.color = Color.red;
-        Handheld.Vibrate();                              //Вибрация
+        //Handheld.Vibrate();                              //Вибрация
 
         yield return null;
 
@@ -237,6 +238,10 @@ public class PlayerBehaviour : MonoBehaviour
 
                     _knockBack.HitSomeObject(target);
                 }
+                else if (target.CompareTag("Chest"))
+                {
+                    StartCoroutine(OpenChest(target));
+                }
                 else
                 {
                     StartCoroutine(AttackTheEnemy(null));    // если игрок не видит врага - просто влючить анимацию взамаха меча
@@ -269,6 +274,14 @@ public class PlayerBehaviour : MonoBehaviour
         Anim.SetBool("Attack", false);
     }
 
+    private IEnumerator OpenChest(GameObject target)
+    {
+        ParametersOfGeneration pof = target.GetComponent<ParametersOfGeneration>();
+        GameObject artefactPrefub = target.transform.Find("Artefact").gameObject;
+        pof.ArtefactCreated(artefactPrefub, target);
+        target.transform.GetComponent<Renderer>().material.color = Color.gray;
+        yield return null;
+    }
     public void AnimationController()
     {
         Anim.SetFloat("Speed", Mathf.Abs(MInput));

@@ -9,10 +9,7 @@ public class HurtBoxBasic : MonoBehaviour
     Vector2 _endPosition;
     public float TimeBetweenAttack = 1.5f;  
     public float TimeTillAttack    = 0.0f;
-    public UnityEngine.Transform SightDistance;
-    Collider2D player;
-    Collider2D me;
-    bool isAttacking = false;
+    
     void Awake()
     {
         bb = transform.parent.gameObject.GetComponent(typeof (BasicBehavior)) as BasicBehavior;

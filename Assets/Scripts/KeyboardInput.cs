@@ -7,19 +7,31 @@ public class KeyboardInput : MonoBehaviour
     [Header("Keyboard Input Settings")]
     public KeyCode JumpButton = KeyCode.Space;
     public KeyCode AttackButton = KeyCode.E;
-
+    
     private PlayerBehaviour _player;
 
     public AnimationCurve JumpCurve;
     public float JumpTime;
 
+    enum kJumpStage { None, Track, Levitate }
+    kJumpStage JumpStage;
+    float LevitateTimer;
+    float LevitateTime = 1f;
+    Vector2 beginPosPlatform;
+    Vector2 currentPosPlatform;
     void Start()
     {
-        _player = GetComponent<PlayerBehaviour>();
+        _player = GetComponent<PlayerBehaviour>(); 
+        beginPosPlatform = _player.Platform.localPosition;
+        Debug.Log("Начальное положение" + beginPosPlatform);
     }
 
     void Update()
-    {
+    {   
+        currentPosPlatform = _player.Platform.localPosition;
+        if (beginPosPlatform != currentPosPlatform)
+        {_player.Platform.localPosition = beginPosPlatform; Debug.Log("Произошло смещение."+ currentPosPlatform);}
+       
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             _player.runDir = _player.MInput;
 
@@ -31,6 +43,24 @@ public class KeyboardInput : MonoBehaviour
         {
             _player.Speed = Mathf.Lerp(_player.Speed, 0f, _player.DecelerationTime * Time.deltaTime);
         }
+
+        switch (JumpStage) {
+        case kJumpStage.None: {_player.Platform.gameObject.SetActive(false);} break;
+        case kJumpStage.Track: {
+            if (_player.rb.velocity.y < 0) JumpStage = kJumpStage.Levitate;
+        } break;
+        case kJumpStage.Levitate: {
+            LevitateTimer += Time.deltaTime;
+            if (LevitateTimer > LevitateTime) JumpStage = kJumpStage.None;
+            _player.rb.velocity = new Vector2(_player.rb.velocity.x, 0);
+            _player.Platform.gameObject.SetActive(true);
+           
+           _player.Anim.SetBool("isGrounded",true);
+        
+        } break;
+    }
+    
+            
     }
 
     public void KeyboardWalkAndAttack()
@@ -42,6 +72,7 @@ public class KeyboardInput : MonoBehaviour
             if (_player.Anim.GetBool("Attack") == false)
             {
                 Debug.Log("Pressing E");
+                
                 _player.DetectEnemy();
             }
         }
@@ -66,6 +97,7 @@ public class KeyboardInput : MonoBehaviour
         _player.isGrounded = Physics2D.OverlapCircle(_player.Feet.position, _player.feetRadius, _player.Groundlayer);
 
         KeyboardJump();
+        
     }
 
     public void KeyboardJump()
@@ -74,13 +106,19 @@ public class KeyboardInput : MonoBehaviour
         {
             if (Input.GetKeyDown(JumpButton) && _player.isGrounded)
             {
-                _player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
+                //_player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
                 _player.rb.velocity = Vector2.up * _player.JumpingVelocity;
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                JumpStage = kJumpStage.Track;
+                LevitateTimer = 0;
             }
             if (_player.rb.velocity.y < 0)            //Ускорение падения
             {
-                _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.FallAccelerationValue);
+                _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.FallAccelerationValue); 
             }
+            
         }
         else
         {
@@ -96,4 +134,5 @@ public class KeyboardInput : MonoBehaviour
         }
     }
 
+  
 }
