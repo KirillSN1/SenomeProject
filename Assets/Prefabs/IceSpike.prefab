@@ -154,4 +154,5 @@ MonoBehaviour:
   TimeBetweenAttack: 1
   TimeTillAttack: 0
   DamageAmount: 1
+  _knockBack: {fileID: 0}
   IsOnSpike: 0

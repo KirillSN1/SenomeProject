@@ -117,6 +117,7 @@ public class BasicBehavior : MonoBehaviour
 
     public IEnumerator ReceiveDamage(int amount)
     {
+        yield return new WaitForSeconds(.2f);
         Health -= amount;
         Debug.Log("Enemy got hit!");
         

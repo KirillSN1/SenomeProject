@@ -2124,7 +2124,7 @@ GameObject:
   - component: {fileID: 176111933}
   - component: {fileID: 176111932}
   - component: {fileID: 176111931}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Chest (2)
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -2382,7 +2382,7 @@ Transform:
   m_Children:
   - {fileID: 894226296}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &176174626
 PrefabInstance:
@@ -3810,9 +3810,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343620333}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.93, y: 3.11, z: -0.028394}
-  m_LocalScale: {x: 0.26487267, y: 0.26487267, z: 0.26487267}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.458181, y: -0.91352534, z: 7.893498}
+  m_LocalScale: {x: 0.4320854, y: 0.4320854, z: 0.4320854}
   m_Children:
   - {fileID: 129395055}
   - {fileID: 11699763}
@@ -3836,8 +3836,8 @@ Transform:
   - {fileID: 1267486237}
   - {fileID: 1726954218}
   - {fileID: 411727590}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 739081416}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &343620340
 Rigidbody2D:
@@ -6048,10 +6048,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0056392513, y: -0.04910229}
+  m_Offset: {x: 0.00832063, y: -0.035877317}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.35, y: 0.5}
     oldSize: {x: 0.26625, y: 0.413125}
     newSize: {x: 0.26, y: 0.32}
     adaptiveTilingThreshold: 0.5
@@ -6059,7 +6059,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12366713, y: 0.2911983}
+  m_Size: {x: 0.18097532, y: 0.3176483}
   m_EdgeRadius: 0
 --- !u!50 &665896602
 Rigidbody2D:
@@ -7163,7 +7163,7 @@ GameObject:
   - component: {fileID: 739081417}
   - component: {fileID: 739081418}
   - component: {fileID: 739081419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Chest
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -7229,8 +7229,9 @@ Transform:
   m_LocalScale: {x: 0.61301, y: 0.61301, z: 0.61301}
   m_Children:
   - {fileID: 1681520739}
+  - {fileID: 343620339}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &739081417
 SpriteRenderer:
@@ -17468,7 +17469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1049752773
 Transform:
   m_ObjectHideFlags: 0
@@ -19017,7 +19018,7 @@ GameObject:
   - component: {fileID: 1240846414}
   - component: {fileID: 1240846413}
   - component: {fileID: 1240846412}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Chest (1)
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -19275,7 +19276,7 @@ Transform:
   m_Children:
   - {fileID: 1633779559}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267486236
 GameObject:
@@ -23793,7 +23794,7 @@ GameObject:
   - component: {fileID: 1814582170}
   - component: {fileID: 1814582169}
   - component: {fileID: 1814582168}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Chest (3)
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -24051,7 +24052,7 @@ Transform:
   m_Children:
   - {fileID: 2019849274}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1825178155
 PrefabInstance:

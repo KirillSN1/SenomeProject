@@ -230,7 +230,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             var target = obj.collider.gameObject;
 
-          if(State!= PlayerStates.Attacking)
+          if(State!= PlayerStates.Attacking && State!= PlayerStates.Walking && State!=PlayerStates.ReceivingDamage)
             {
                 if (target.CompareTag("Enemy"))   // игрок увидел противника
                 {
