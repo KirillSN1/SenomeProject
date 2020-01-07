@@ -26,7 +26,7 @@ TagManager:
   - 
   - Ground
   - Player
-  - 
+  - Light
   - 
   - 
   - 
@@ -51,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Platform
+    uniqueID: 666371101
     locked: 0
