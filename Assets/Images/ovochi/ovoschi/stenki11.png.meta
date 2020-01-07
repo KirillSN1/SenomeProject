@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: 2228568178395324682b48a0dad28b5d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7015239523495427135
+    second: stenki11_3
+  - first:
+      213: 23739177022906215
+    second: stenki11_4
+  - first:
+      213: 1563201367119212765
+    second: stenki11_26
+  - first:
+      213: -1687827885159536816
+    second: stenki11_27
+  - first:
+      213: -5756453044296107356
+    second: stenki11_28
+  - first:
+      213: -4232055695264183612
+    second: stenki11_29
+  - first:
+      213: 945269016792930358
+    second: stenki11_30
+  - first:
+      213: 8286332621415933839
+    second: stenki11_31
+  - first:
+      213: 884527535209524700
+    second: stenki11_32
+  - first:
+      213: -6944142855451896165
+    second: stenki11_50
+  - first:
+      213: 6152598305179403366
+    second: stenki11_53
+  - first:
+      213: -3036763557077210506
+    second: stenki11_62
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 30
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: stenki11_3
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 802
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dd231a49c8a61b49969e98f7deb2d6b
+      internalID: 7015239523495427135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_4
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 801
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68823fdb7dbb01b42bbc40e82ad31afe
+      internalID: 23739177022906215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_26
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 738
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa581a5986d42d5409e6b40c24598a37
+      internalID: 1563201367119212765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_27
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 122
+        width: 297
+        height: 601
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 19, y: 23, z: 26, w: 17}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3496c810b56a9094288ff428c6fea545
+      internalID: -1687827885159536816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_28
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 298
+        width: 312
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 34, y: 13, z: 26, w: 17}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a0ba12c1bd3d0468afaf2025778106
+      internalID: -5756453044296107356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_29
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 252
+        width: 307
+        height: 418
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 30, y: 12, z: 26, w: 17}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb040b04086610641b0a3c4275ac3901
+      internalID: -4232055695264183612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_30
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 314
+        width: 526
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 16, y: 260, z: 20, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff6e45842869ba41b3e5c4eb1291955
+      internalID: 945269016792930358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_31
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 646
+        width: 341
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 883cc2dd72a01e047ba5f53d6f85908b
+      internalID: 8286332621415933839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_32
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 621
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbc413c3df572a645b58b1f8ad6bf61f
+      internalID: 884527535209524700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_50
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 187
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8472b7316bebfa94d815c67d25134de1
+      internalID: -6944142855451896165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_53
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 146
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d22e4f0678deb8b4c967f9642f38a37f
+      internalID: 6152598305179403366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stenki11_62
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 122
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1d4ad8ef92b5b46813799224b66597
+      internalID: -3036763557077210506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
