@@ -19,19 +19,25 @@ public class KeyboardInput : MonoBehaviour
     float LevitateTime = 1f;
     Vector2 beginPosPlatform;
     Vector2 currentPosPlatform;
+    public bool useMagnetTEST = true;
+    public Camera mainCamera;
+    public bool InternalRunning = true;
     void Start()
     {
         _player = GetComponent<PlayerBehaviour>(); 
         beginPosPlatform = _player.Platform.localPosition;
         Debug.Log("Начальное положение" + beginPosPlatform);
+        
     }
 
     void Update()
     {   
+        
         currentPosPlatform = _player.Platform.localPosition;
         if (beginPosPlatform != currentPosPlatform)
         {_player.Platform.localPosition = beginPosPlatform; Debug.Log("Произошло смещение."+ currentPosPlatform);}
-       
+        
+        if (!InternalRunning)
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             _player.runDir = _player.MInput;
 
@@ -65,8 +71,11 @@ public class KeyboardInput : MonoBehaviour
 
     public void KeyboardWalkAndAttack()
     {
+        if (!InternalRunning)
         _player.MInput = Input.GetAxisRaw("Horizontal");
-
+        else
+        {_player.MInput = 1;
+        _player.Acc = true;}
         if (Input.GetKeyDown(AttackButton))      // атаковать enemy
         {
             if (_player.Anim.GetBool("Attack") == false)
@@ -76,7 +85,13 @@ public class KeyboardInput : MonoBehaviour
                 _player.DetectEnemy();
             }
         }
-        if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
+        
+        if (useMagnetTEST)
+        {
+            findObjects();
+        }
+        if (!InternalRunning)
+        {if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
         {
             _player.Acc = true;
         }
@@ -84,8 +99,8 @@ public class KeyboardInput : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             _player.Acc = false;
-            //_player.Speed = 0f;
-        }
+            _player.Speed = 0f;
+        }}
         if (_player.Acc)
         {
             _player.rb.velocity = new Vector2(_player.MInput * _player.Speed, _player.rb.velocity.y);
@@ -100,6 +115,19 @@ public class KeyboardInput : MonoBehaviour
         
     }
 
+    public void findObjects()
+    {
+        foreach (var a in _player.GameObjectsinView)
+        {
+            MoveObjectToPlayer(a.gameObject);
+        }
+    }
+
+    public void MoveObjectToPlayer(GameObject target){
+        var PickUp = target.GetComponent<PickUps>(); 
+        PickUp.flyToTarget = true;
+        
+    }
     public void KeyboardJump()
     {
         if (!_player.DoubleJump)

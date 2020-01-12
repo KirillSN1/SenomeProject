@@ -33,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     //  public KeyCode AttackButton = KeyCode.E;
     public bool KeyboardInput = false;          //Управление с клавиатуры
 
-    [HideInInspector]
+    //[HideInInspector]
     public float MInput;
 
     [Header("Audio settings")]
@@ -79,7 +79,7 @@ public class PlayerBehaviour : MonoBehaviour
     
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
-
+    public List<GameObject> GameObjectsinView = new List<GameObject>();
     public AudioSource ASourсe;
 
     public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
@@ -104,6 +104,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {   
+        
         if (Health <= 0)
         {
             IsAlive = false;
