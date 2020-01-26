@@ -22,6 +22,7 @@ public class KeyboardInput : MonoBehaviour
     public bool useMagnetTEST = true;
     public Camera mainCamera;
     public bool InternalRunning = true;
+    public bool zoomin = false, zoomout = false;
     void Start()
     {
         _player = GetComponent<PlayerBehaviour>(); 
@@ -64,9 +65,10 @@ public class KeyboardInput : MonoBehaviour
            _player.Anim.SetBool("isGrounded",true);
         
         } break;
+
+        
     }
-    
-            
+        
     }
 
     public void KeyboardWalkAndAttack()
@@ -128,6 +130,11 @@ public class KeyboardInput : MonoBehaviour
         PickUp.flyToTarget = true;
         
     }
+
+    
+
+    
+    
     public void KeyboardJump()
     {
         if (!_player.DoubleJump)
