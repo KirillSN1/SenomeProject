@@ -80,6 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
     public List<GameObject> GameObjectsinView = new List<GameObject>();
+    public Collider2D currentPlatform;
     public AudioSource ASourсe;
 
     public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };

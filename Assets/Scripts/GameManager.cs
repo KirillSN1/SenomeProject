@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
     public void CloseActivePanel(GameObject activeCanvas)
     {
         Debug.Log("Close " + activeCanvas.name);
+        Player.GetComponent<KeyboardInput>().InternalRunning = true;
         activeCanvas.SetActive(false);
     }
 

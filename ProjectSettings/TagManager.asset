@@ -15,6 +15,10 @@ TagManager:
   - InputPanel
   - CoinSource
   - Chest
+  - LiveCamera
+  - lvl1
+  - lvl2
+  - playerfeet
   layers:
   - Default
   - TransparentFX

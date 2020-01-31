@@ -22,7 +22,7 @@ public class KeyboardInput : MonoBehaviour
     public bool useMagnetTEST = true;
     public Camera mainCamera;
     public bool InternalRunning = true;
-    public bool zoomin = false, zoomout = false;
+    public bool iamup = false, iamdown = true;
     void Start()
     {
         _player = GetComponent<PlayerBehaviour>(); 
@@ -76,7 +76,7 @@ public class KeyboardInput : MonoBehaviour
         if (!InternalRunning)
         _player.MInput = Input.GetAxisRaw("Horizontal");
         else
-        {_player.MInput = 1;
+        {_player.MInput = 3;
         _player.Acc = true;}
         if (Input.GetKeyDown(AttackButton))      // атаковать enemy
         {
@@ -137,18 +137,25 @@ public class KeyboardInput : MonoBehaviour
     
     public void KeyboardJump()
     {
+       
+ 
         if (!_player.DoubleJump)
         {
             if (Input.GetKeyDown(JumpButton) && _player.isGrounded)
             {
                 //_player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
-                _player.rb.velocity = Vector2.up * _player.JumpingVelocity;
-            }
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                JumpStage = kJumpStage.Track;
-                LevitateTimer = 0;
-            }
+               if (iamdown)
+                {_player.rb.velocity = Vector2.up * _player.JumpingVelocity * 3;
+                iamup = true;
+                iamdown = false;}
+                else
+                if (iamup)
+                {   
+                 _player.currentPlatform.enabled = false; 
+                iamup = false;   
+                iamdown = true;}
+                }
+            
             if (_player.rb.velocity.y < 0)            //Ускорение падения
             {
                 _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.FallAccelerationValue); 
