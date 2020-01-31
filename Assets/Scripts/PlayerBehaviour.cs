@@ -288,6 +288,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Anim.SetFloat("Speed", Mathf.Abs(MInput));
         Anim.SetFloat("JumpVeloc", rb.velocity.y);
+        if (State == PlayerStates.Walking) 
+        {
+            Anim.speed = rb.velocity.x / 5; //Изменение скорости анимации бега в зависимости от скорости персонажа.
+        }
 
         if (MInput < 0)
         {
