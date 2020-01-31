@@ -76,7 +76,7 @@ public class KeyboardInput : MonoBehaviour
         if (!InternalRunning)
         _player.MInput = Input.GetAxisRaw("Horizontal");
         else
-        {_player.MInput = 3;
+        {_player.MInput = 2;
         _player.Acc = true;}
         if (Input.GetKeyDown(AttackButton))      // атаковать enemy
         {
@@ -146,12 +146,14 @@ public class KeyboardInput : MonoBehaviour
                 //_player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
                if (iamdown)
                 {_player.rb.velocity = Vector2.up * _player.JumpingVelocity * 3;
+                
                 iamup = true;
                 iamdown = false;}
                 else
                 if (iamup)
-                {   
-                 _player.currentPlatform.enabled = false; 
+                {  
+                 _player.currentPlatform.enabled = false;
+                
                 iamup = false;   
                 iamdown = true;}
                 }

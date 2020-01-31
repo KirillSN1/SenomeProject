@@ -201,7 +201,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (isGrounded && State != PlayerStates.ReceivingDamage)
             {
-                rb.velocity = Vector2.up * JumpingVelocity;
+                rb.velocity = Vector2.up * JumpingVelocity * 3;
             }
             if (rb.velocity.y < 0) //Ускорение падения
             {
