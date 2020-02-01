@@ -5,17 +5,34 @@ using UnityEngine;
 public class Transition : MonoBehaviour
 {
     PlayerBehaviour player;
+    GameObject playerGameObject;
+    KeyboardInput playerKeyboard;
+    Collider2D platform;
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
+        platform = GetComponent<Collider2D>();
+        playerGameObject = GameObject.FindGameObjectWithTag("Player");
+        player = playerGameObject.GetComponent<PlayerBehaviour>();
+        playerKeyboard = playerGameObject.GetComponent<KeyboardInput>();
     }
-   /// <summary>
-   /// Sent when an incoming collider makes contact with this object's
-   /// collider (2D physics only).
-   /// </summary>
-   /// <param name="other">The Collision2D data associated with this collision.</param>
-   void OnCollisionEnter2D(Collision2D other)
-   {
-       player.currentPlatform = GetComponent<BoxCollider2D>();
-   }
+
+    private void Update() {
+        if (playerGameObject.transform.position.y < transform.position.y) 
+           {
+                player.isOnSky = false;  
+           }
+           else if (playerGameObject.transform.position.y >= transform.position.y)  
+           {
+               player.isOnSky = true;
+               
+           }
+              
+    }
+
+    public void OnCollisionEnter2D(Collision2D other){
+        player.currentPlatform = GetComponent<BoxCollider2D>();
+    }
+  
+
+   
 }

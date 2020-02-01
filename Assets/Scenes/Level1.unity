@@ -2012,7 +2012,7 @@ Transform:
   - {fileID: 31496705}
   - {fileID: 783876344}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &165752117
 PrefabInstance:
@@ -3900,7 +3900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &350474398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5970,8 +5970,9 @@ MonoBehaviour:
   JumpingVelocity: 10
   IsAlive: 1
   isGrounded: 0
+  isOnSky: 0
   DamageTime: 0.5
-  KeyboardInput: 0
+  KeyboardInput: 1
   MInput: 0
   FootstepsSounds:
   - {fileID: 8300000, guid: eeb5ff6bdd7768340ac9d649e37b9130, type: 3}
@@ -6002,6 +6003,9 @@ MonoBehaviour:
   Groundlayer:
     serializedVersion: 2
     m_Bits: 256
+  SkyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   Anim: {fileID: 0}
   DoubleJump: 0
   JumpsNum: 0
@@ -6010,6 +6014,7 @@ MonoBehaviour:
   currentPlatform: {fileID: 0}
   "ASour\u0441e": {fileID: 0}
   State: 0
+  playerCollider: {fileID: 0}
 --- !u!70 &665896600
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6130,7 +6135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 37
   m_Sprite: {fileID: 21300000, guid: 53aa1cfc740d30344b7c1cc1ebd2ee9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6150,7 +6155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665896597}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -142.7, y: -16, z: 0.3}
+  m_LocalPosition: {x: -142.7, y: 1.44, z: 0.3}
   m_LocalScale: {x: 11.332999, y: 11.332999, z: 11.332999}
   m_Children:
   - {fileID: 35473642}
@@ -6579,7 +6584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704225788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -142.7, y: -16, z: -9.7}
+  m_LocalPosition: {x: -142.7, y: 1.44, z: -9.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7653,7 +7658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -115.49988, y: -91.44}
+  m_AnchoredPosition: {x: -115.5, y: -91.43994}
   m_SizeDelta: {x: 105, y: 104.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790506465
@@ -19473,7 +19478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311139509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -142.7, y: -16, z: -9.7}
+  m_LocalPosition: {x: -142.7, y: 1.44, z: -9.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 729253886}
@@ -25236,7 +25241,7 @@ Transform:
   - {fileID: 1186053081}
   - {fileID: 847965775}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1991355478
 AudioSource:
@@ -26323,7 +26328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 112}
+  m_AnchoredPosition: {x: -966, y: 112}
   m_SizeDelta: {x: 113.3, y: 114.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2092561237
@@ -27013,10 +27018,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestRunnerScene
       objectReference: {fileID: 0}
+    - target: {fileID: 3044853903294686087, guid: 87294b83bc7833c4c80b83f9f469359f,
+        type: 3}
+      propertyPath: m_TagString
+      value: lvl2
+      objectReference: {fileID: 0}
     - target: {fileID: 6018663219087271588, guid: 87294b83bc7833c4c80b83f9f469359f,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565390325232065690, guid: 87294b83bc7833c4c80b83f9f469359f,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -1.3558311
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565390325232065690, guid: 87294b83bc7833c4c80b83f9f469359f,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.42554545
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87294b83bc7833c4c80b83f9f469359f, type: 3}
