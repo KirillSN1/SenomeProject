@@ -20,10 +20,14 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Platform;
     [Range(1, 10)]
     public float JumpingVelocity;
+    public float platformJump = 10;
 
+    [HideInInspector]
     public bool IsAlive = true;
     public bool isGrounded = false;
+    [HideInInspector]
     public bool isOnSky = false;
+
     [Header("Enemy Settings")]
     [Range(0, 1)]
     public float DamageTime;
@@ -33,8 +37,8 @@ public class PlayerBehaviour : MonoBehaviour
     //  public KeyCode AttackButton = KeyCode.E;
     public bool KeyboardInput = false;          //Управление с клавиатуры
 
-    //[HideInInspector]
-    public float MInput;
+    [HideInInspector]
+    public float MInput;                        //Движение персонажа
 
     [Header("Audio settings")]
     public AudioClip[] FootstepsSounds;
@@ -49,7 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
     [HideInInspector]
     public bool Acc;
     [HideInInspector]
-    public float AccelerationPower = 4f;
+    public float AccelerationPower;
     [Range(1, 6)]
     public float AccelerationTime = 6f;
     [Range(1, 6)]
@@ -64,7 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
     public LayerMask SkyLayer; 
     public Animator Anim;
 
-    [HideInInspector]
+    
     public bool DoubleJump = false;
 
     [HideInInspector]
@@ -188,11 +192,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (Acc)
         {
-            rb.velocity = new Vector2(MInput * Speed, rb.velocity.y);
+            rb.velocity = new Vector2(MInput * AccelerationPower, rb.velocity.y);
         }
         else
         {
-            rb.velocity = new Vector2(runDir * Speed, rb.velocity.y);
+            rb.velocity = new Vector2(runDir * AccelerationPower, rb.velocity.y);
         }
         
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
@@ -295,7 +299,7 @@ public class PlayerBehaviour : MonoBehaviour
         Anim.SetFloat("JumpVeloc", rb.velocity.y);
         if (State == PlayerStates.Walking) 
         {
-            Anim.speed = rb.velocity.x / 5; //Изменение скорости анимации бега в зависимости от скорости персонажа.
+            Anim.speed = rb.velocity.x / 8; //Изменение скорости анимации бега в зависимости от скорости персонажа.
         }
 
         if (MInput < 0)

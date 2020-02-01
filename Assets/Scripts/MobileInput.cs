@@ -11,7 +11,7 @@ public class MobileInput : MonoBehaviour
     private float MInput;
     private bool left;
     private bool right;
-    
+    private KeyboardInput kInput;
 
     private void Start()
     {
@@ -35,11 +35,11 @@ public class MobileInput : MonoBehaviour
         main.MInput = MInput;
         if (main.Acc)
         {
-            main.Speed = Mathf.Lerp(main.Speed, main.AccelerationPower, main.AccelerationTime * Time.deltaTime);
+            main.AccelerationPower = Mathf.Lerp(main.AccelerationPower, main.Speed, main.AccelerationTime * Time.deltaTime);
         }
         else
         {
-            main.Speed = Mathf.Lerp(main.Speed, 0f, main.DecelerationTime * Time.deltaTime);
+            main.AccelerationPower = Mathf.Lerp(main.AccelerationPower, 0f, main.DecelerationTime * Time.deltaTime);
         }
     }
 
@@ -80,6 +80,31 @@ public class MobileInput : MonoBehaviour
         if (main.Anim.GetBool("Attack") == false)
         {
             main.DetectEnemy();
+        }
+    }
+
+    public void SwitchUp()//Переход между платформами
+    {
+        if (main.isGrounded && !main.isOnSky)
+        {
+            main.rb.velocity = Vector2.up * main.platformJump * 3.5f;
+
+            if (main.currentPlatform != null)
+            {
+                main.currentPlatform.enabled = true;
+            }
+            Debug.Log("Up");
+        }
+    }
+    public void SwitchDown()//Переход между платформами
+    {
+        if (main.isGrounded && main.isOnSky)
+        {
+            if (main.currentPlatform != null)
+            {
+                main.currentPlatform.enabled = false;
+            }
+            Debug.Log("Doun");
         }
     }
 

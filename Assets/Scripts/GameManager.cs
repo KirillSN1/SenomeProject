@@ -72,6 +72,13 @@ public class GameManager : MonoBehaviour
            GameState = GameStates.OnMainMenu;
         }       
     }
+    private void FixedUpdate()
+    {
+        if (Gm == null)
+        {
+            Gm = gameObject.GetComponent<GameManager>(); //Можно удалить FixedUpdate перед компиляцией(Нужен для исправления ошибки Null)
+        }
+    }
 
     void Update()
     {
