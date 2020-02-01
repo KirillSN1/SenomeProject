@@ -7517,7 +7517,7 @@ GameObject:
   - component: {fileID: 773872681}
   - component: {fileID: 773872680}
   m_Layer: 5
-  m_Name: Jump(Button) (1)
+  m_Name: SwitchUp(Button)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7951,7 +7951,7 @@ GameObject:
   - component: {fileID: 799559023}
   - component: {fileID: 799559022}
   m_Layer: 5
-  m_Name: Jump(Button) (2)
+  m_Name: SwitchDown(Button)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
