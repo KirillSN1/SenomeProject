@@ -1,0 +1,9 @@
+diff a/Assets/Scenes/Level1.unity b/Assets/Scenes/Level1.unity	(rejected hunks)
+@@ -27434,6 +27434,7 @@
+       objectReference: {fileID: 0}
+     m_RemovedComponents: []
+   m_SourcePrefab: {fileID: 100100000, guid: 8ccb90f79b9733946a62827db3985018, type: 3}
++<<<<<<< HEAD
+ =======
+ --- !u!1001 &9200622813355310987
+ PrefabInstance:

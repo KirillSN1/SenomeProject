@@ -22,10 +22,12 @@ public class KeyboardInput : MonoBehaviour
     public bool useMagnetTEST = true;
     public Camera mainCamera;
     public bool InternalRunning = true;
-    public bool zoomin = false, zoomout = false;
+    public bool iamup = false, iamdown = true;
+    
     void Start()
     {
-        _player = GetComponent<PlayerBehaviour>(); 
+        _player = GetComponent<PlayerBehaviour>();
+        
         beginPosPlatform = _player.Platform.localPosition;
         Debug.Log("Начальное положение" + beginPosPlatform);
         
@@ -76,7 +78,7 @@ public class KeyboardInput : MonoBehaviour
         if (!InternalRunning)
         _player.MInput = Input.GetAxisRaw("Horizontal");
         else
-        {_player.MInput = 1;
+        {_player.MInput = 2;
         _player.Acc = true;}
         if (Input.GetKeyDown(AttackButton))      // атаковать enemy
         {
@@ -137,37 +139,44 @@ public class KeyboardInput : MonoBehaviour
     
     public void KeyboardJump()
     {
-        if (!_player.DoubleJump)
-        {
-            if (Input.GetKeyDown(JumpButton) && _player.isGrounded)
+            if (Input.GetKeyDown(JumpButton) && _player.JumpsNum < 1)
             {
-                //_player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
-                _player.rb.velocity = Vector2.up * _player.JumpingVelocity;
-            }
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                JumpStage = kJumpStage.Track;
-                LevitateTimer = 0;
+                _player.JumpingVelocity = JumpCurve.Evaluate(JumpTime);
+                DoubleJump();
+                _player.JumpsNum++;
             }
             if (_player.rb.velocity.y < 0)            //Ускорение падения
             {
                 _player.rb.velocity = new Vector2(_player.rb.velocity.x, _player.rb.velocity.y * _player.FallAccelerationValue); 
             }
-            
-        }
-        else
-        {
-            if (Input.GetKeyDown(JumpButton) && _player.JumpsNum < 1)
-            {
-                ++_player.JumpsNum;
-                _player.rb.velocity = (Vector2.up * _player.JumpingVelocity) + new Vector2(_player.rb.velocity.x, 0);
-            }
-            else if (_player.isGrounded && _player.JumpsNum > 0)
-            {
-                _player.JumpsNum = 0;
-            }
-        }
+            if (_player.isGrounded) _player.JumpsNum = 0;
+            if (_player.isGrounded && _player.isOnSky) {iamup = true; iamdown = false;}
+            else if (_player.isGrounded && !_player.isOnSky) {iamup = false; iamdown = true;}
+        
     }
 
+    public void DoubleJump(){
+                 if (iamdown)
+                {
+                    _player.rb.velocity = Vector2.up * _player.JumpingVelocity * 3f; 
+                    
+                    if (_player.currentPlatform != null)
+                    _player.currentPlatform.enabled = true;
+                }
+                else
+                if (iamup)
+                {  
+                    if (_player.currentPlatform != null)
+                    _player.currentPlatform.enabled = false;
+                    
+                }
+
+                }
+
+
+    }
+    
+
+    
   
-}
+

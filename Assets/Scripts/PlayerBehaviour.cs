@@ -23,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public bool IsAlive = true;
     public bool isGrounded = false;
-
+    public bool isOnSky = false;
     [Header("Enemy Settings")]
     [Range(0, 1)]
     public float DamageTime;
@@ -61,6 +61,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
+    public LayerMask SkyLayer; 
     public Animator Anim;
 
     [HideInInspector]
@@ -80,13 +81,16 @@ public class PlayerBehaviour : MonoBehaviour
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
     public List<GameObject> GameObjectsinView = new List<GameObject>();
+    public Collider2D currentPlatform;
     public AudioSource ASourсe;
 
     public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
     public PlayerStates State = PlayerStates.Idling;
+    public Collider2D playerCollider;
 
     void Awake()
     {
+        playerCollider = GetComponent<Collider2D>();
         Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 2;
@@ -192,6 +196,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
+        
+        
     }
 
     public void Jump()    // прыжок для мобильных устройств, вызывается по нажатию кнопки в MobileInput
@@ -200,7 +206,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (isGrounded && State != PlayerStates.ReceivingDamage)
             {
-                rb.velocity = Vector2.up * JumpingVelocity;
+                rb.velocity = Vector2.up * JumpingVelocity * 3;
             }
             if (rb.velocity.y < 0) //Ускорение падения
             {
@@ -345,4 +351,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         Gizmos.DrawWireSphere(Feet.position, feetRadius);
     }
+
+   
 }
