@@ -17,7 +17,9 @@ public class Transition : MonoBehaviour
     }
 
     private void Update() {
-        if (playerGameObject.transform.position.y < transform.position.y) 
+        
+        if (playerGameObject.transform.position.y < transform.localPosition.y)
+           
            {
                 player.isOnSky = false;  
            }

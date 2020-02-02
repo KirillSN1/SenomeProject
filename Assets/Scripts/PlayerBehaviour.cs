@@ -26,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool IsAlive = true;
     public bool isGrounded = false;
     [HideInInspector]
-    public bool isOnSky = false;
+    public bool isOnSky;
 
     [Header("Enemy Settings")]
     [Range(0, 1)]
@@ -140,6 +140,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (!IsAlive)
         {
             State = PlayerStates.Dying;
+            GetComponent<Collider2D>().enabled = false;
+            GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = null;
         }
         if (Anim.GetBool("ReceiveDamage"))
         {

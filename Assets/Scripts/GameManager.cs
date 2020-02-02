@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int BeatLevelScore = 0;
     public GameObject MainCanvas;
     public GameObject StartLevelCanvas;
+    public GameObject LoseCanvas;
     public GameObject BeatLevelCanvas;
     public MobileInput InputClass;
 
@@ -54,11 +55,13 @@ public class GameManager : MonoBehaviour
 
             if (StartLevelCanvas)
             {
+                _playerState.KeyboardInput = false;
                 StartLevelCanvas.SetActive(true);
             }
 
             if (CanBeatLevel)
             {
+                
                 BeatLevelCanvas.SetActive(false);
             }
 
@@ -113,7 +116,8 @@ public class GameManager : MonoBehaviour
         switch (GameState)                                      
         {
             case GameStates.LostLevel:                     // в случае смерти игрока, перезагружаем текущий уровень
-                SceneManager.LoadScene(CurrentLevel);
+                SetLostLevelState();
+                
                 break;
 
             case GameStates.BeatLevel:                 
@@ -132,6 +136,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void SetLostLevelState()         // в случае победы на уровне - загружаем BeatLevelCanvas
+    {
+        _playerState.KeyboardInput = false;
+        GameIsOver = true;
+        StartLevelCanvas.SetActive(false);
+        BeatLevelCanvas.SetActive(false);
+        LoseCanvas.SetActive(true);
+        var inputPanel = GameObject.FindGameObjectWithTag("InputPanel");
+
+        if(inputPanel)     // проверяем, что панель ввода еще не отключена
+        {
+            InputClass.RightUp();
+            InputClass.LeftUp();
+            inputPanel.SetActive(false);    
+        }
+        
+    }
     void SetBeatLevelState()         // в случае победы на уровне - загружаем BeatLevelCanvas
     {
         GameIsOver = true;
@@ -153,7 +174,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Close " + activeCanvas.name);
         Player.GetComponent<KeyboardInput>().InternalRunning = true;
+        _playerState.KeyboardInput = true;
         activeCanvas.SetActive(false);
+        if (GameState == GameStates.LostLevel){
+            GameState = GameStates.Playing;
+            SceneManager.LoadScene(CurrentLevel);
+            GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = 
+            Player.transform;}
     }
 
 }

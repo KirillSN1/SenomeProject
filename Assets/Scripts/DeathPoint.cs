@@ -28,6 +28,6 @@ public class DeathPoint : MonoBehaviour
         playerState.Health = 0;
         playerState.IsAlive = false;
 
-        Destroy(player, 0.5f);
+        //Destroy(player, 0.5f);
     }
 }
