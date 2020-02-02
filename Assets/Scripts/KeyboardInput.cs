@@ -19,7 +19,7 @@ public class KeyboardInput : MonoBehaviour
     public bool useMagnetTEST = true;
     public Camera mainCamera;
     public bool InternalRunning = true;
-    public bool iamup = false, iamdown = true;
+    
 
     void Start()
     {
