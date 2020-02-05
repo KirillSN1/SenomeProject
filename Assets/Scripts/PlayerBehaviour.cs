@@ -21,10 +21,10 @@ public class PlayerBehaviour : MonoBehaviour
     [Range(1, 10)]
     public float JumpingVelocity;
     public float platformJump = 10;
+    public bool DoubleJump = false;
 
     [HideInInspector]
     public bool IsAlive = true;
-    public bool isGrounded = false;
     [HideInInspector]
     public bool isOnSky;
 
@@ -41,12 +41,14 @@ public class PlayerBehaviour : MonoBehaviour
     public float MInput;                        //Движение персонажа
 
     [Header("Audio settings")]
+    public AudioSource ASourсe;
     public AudioClip[] FootstepsSounds;
     public AudioClip[] AttackSounds;
     public AudioClip[] JumpSounds;
     public AudioClip[] HitSounds;
+    public float jumpVelosThreshold;
 
-    [Header("Unity settings")]
+    [Header("Physics")]
 
     [Range(1, 1.3f)]
     public float FallAccelerationValue = 1.055f;
@@ -60,37 +62,36 @@ public class PlayerBehaviour : MonoBehaviour
     public float DecelerationTime = 6f;
     [HideInInspector]
     public float runDir;
-    [Space(25f)]
-
+    [Header("Ground/Layers")]
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
-    public LayerMask SkyLayer; 
+    public LayerMask SkyLayer;
+    public bool isGrounded = false;
+    [Header("Animation")]
     public Animator Anim;
-
-    
-    public bool DoubleJump = false;
 
     [HideInInspector]
     public int JumpsNum;
 
     [HideInInspector]
     public Rigidbody2D rb;
+    
+    [Header("PlayerStates")]
+    public PlayerStates State = PlayerStates.Idling;
+    public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
+    [Header("Other")]
+    public List<GameObject> GameObjectsinView = new List<GameObject>();
+    public Collider2D currentPlatform;
+    
+    private Collider2D playerCollider;
 
     private float scale;
     private Vector2 _currentPosition;
     private Vector2 _endPosition;
-    
-    
+
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
     private KeyboardInput _keyboardInput;
-    public List<GameObject> GameObjectsinView = new List<GameObject>();
-    public Collider2D currentPlatform;
-    public AudioSource ASourсe;
-
-    public enum PlayerStates { Idling, Jumping, Falling, ReceivingDamage, Attacking, Walking, Dying };
-    public PlayerStates State = PlayerStates.Idling;
-    public Collider2D playerCollider;
 
     void Awake()
     {
@@ -331,7 +332,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             ASourсe.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
         }
-        if (Anim.GetFloat("JumpVeloc") > 0.01f)
+        if (Anim.GetFloat("JumpVeloc") > jumpVelosThreshold)
         {
             ASourсe.PlayOneShot(JumpSounds[Random.Range(0, JumpSounds.Length)]);
         }
