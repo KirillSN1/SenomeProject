@@ -3913,16 +3913,18 @@ MonoBehaviour:
   Platform: {fileID: 0}
   JumpingVelocity: 0
   platformJump: 10
+  DoubleJump: 0
   IsAlive: 1
-  isGrounded: 0
   isOnSky: 0
   DamageTime: 0
   KeyboardInput: 0
   MInput: 0
+  "ASour\u0441e": {fileID: 0}
   FootstepsSounds: []
   AttackSounds: []
   JumpSounds: []
   HitSounds: []
+  jumpVelosThreshold: 0
   FallAccelerationValue: 1.055
   Acc: 0
   AccelerationPower: 0
@@ -3937,15 +3939,13 @@ MonoBehaviour:
   SkyLayer:
     serializedVersion: 2
     m_Bits: 0
+  isGrounded: 0
   Anim: {fileID: 0}
-  DoubleJump: 0
   JumpsNum: 0
   rb: {fileID: 0}
+  State: 0
   GameObjectsinView: []
   currentPlatform: {fileID: 0}
-  "ASour\u0441e": {fileID: 0}
-  State: 0
-  playerCollider: {fileID: 0}
 --- !u!114 &999973473520010570
 MonoBehaviour:
   m_ObjectHideFlags: 0
