@@ -103,7 +103,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _knockBack = GetComponent<KnockBack>();
 
-        ASourсe = GetComponentInChildren<AudioSource>();
+        ASourсe = GetComponent<AudioSource>();
 
         if (KeyboardInput)
         {
@@ -154,11 +154,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (!Anim.GetBool("IsGrounded"))
         {
-            if (Anim.GetFloat("JumpVeloc") > 0.01f)
+            if (Anim.GetFloat("JumpVeloc") > 0.1f)
             {
                 State = PlayerStates.Jumping;
             }
-            else
+            else if (Anim.GetFloat("JumpVeloc") < 0f)
             {
                 State = PlayerStates.Falling;
             }
