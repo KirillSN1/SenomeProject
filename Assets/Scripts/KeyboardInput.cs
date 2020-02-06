@@ -19,13 +19,15 @@ public class KeyboardInput : MonoBehaviour
     public bool useMagnetTEST = true;
     public Camera mainCamera;
     public bool InternalRunning = true;
+
+    public Transform Platform;
     
 
     void Start()
     {
         _player = GetComponent<PlayerBehaviour>();
 
-        beginPosPlatform = _player.Platform.localPosition;
+        beginPosPlatform = Platform.localPosition;
         Debug.Log("Начальное положение" + beginPosPlatform);
 
     }
@@ -33,10 +35,10 @@ public class KeyboardInput : MonoBehaviour
     void Update()
     {
 
-        currentPosPlatform = _player.Platform.localPosition;
+        currentPosPlatform = Platform.localPosition;
         if (beginPosPlatform != currentPosPlatform)
         {
-            _player.Platform.localPosition = beginPosPlatform; Debug.Log("Произошло смещение." + currentPosPlatform);
+            Platform.localPosition = beginPosPlatform; Debug.Log("Произошло смещение." + currentPosPlatform);
         }
 
         if (!InternalRunning)
@@ -60,7 +62,7 @@ public class KeyboardInput : MonoBehaviour
         {
             case kJumpStage.None:
                 {
-                    _player.Platform.gameObject.SetActive(false);
+                    Platform.gameObject.SetActive(false);
                 }
                 break;
             case kJumpStage.Track:
@@ -76,7 +78,7 @@ public class KeyboardInput : MonoBehaviour
                     LevitateTimer += Time.deltaTime;
                     if (LevitateTimer > LevitateTime) JumpStage = kJumpStage.None;
                     _player.rb.velocity = new Vector2(_player.rb.velocity.x, 0);
-                    _player.Platform.gameObject.SetActive(true);
+                    Platform.gameObject.SetActive(true);
 
                     _player.Anim.SetBool("isGrounded", true);
 

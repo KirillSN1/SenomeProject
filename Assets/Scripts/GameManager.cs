@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     public string CurrentLevel;
 
     private PlayerBehaviour _playerState;
-    private int _scoreCoins = 0;
+    [HideInInspector]
+    public int _scoreCoins = 0;
     private int CurrentCount;
 
     void Awake()
@@ -176,11 +177,13 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<KeyboardInput>().InternalRunning = true;
         _playerState.KeyboardInput = true;
         activeCanvas.SetActive(false);
-        if (GameState == GameStates.LostLevel){
+        if (GameState == GameStates.LostLevel)
+        {
             GameState = GameStates.Playing;
             SceneManager.LoadScene(CurrentLevel);
-            GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = 
-            Player.transform;}
+            GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow =
+            Player.transform;
+        }
     }
 
 }

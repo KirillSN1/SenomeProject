@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int Attack = 1;
     public float Speed = 4;
     public Transform SightDistance;    // поле зрения игрока
-    public Transform Platform;
+    //public Transform Platform;
     [Range(1, 10)]
     public float JumpingVelocity;
     public float platformJump = 10;
