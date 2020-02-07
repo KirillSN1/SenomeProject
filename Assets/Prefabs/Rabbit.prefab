@@ -4149,7 +4149,6 @@ MonoBehaviour:
   Attack: 1
   Speed: 6
   SightDistance: {fileID: 1583628489}
-  Platform: {fileID: 875378395}
   JumpingVelocity: 5
   platformJump: 10
   DoubleJump: 0
@@ -4223,6 +4222,7 @@ MonoBehaviour:
   useMagnetTEST: 1
   mainCamera: {fileID: 0}
   InternalRunning: 1
+  Platform: {fileID: 875378395}
 --- !u!82 &7198926993059121207
 AudioSource:
   m_ObjectHideFlags: 0
