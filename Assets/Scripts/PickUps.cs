@@ -15,14 +15,14 @@ public class PickUps : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerBehaviour = player.GetComponent<PlayerBehaviour>();
     }
-    public void FlyToTarget()
-    {
-        transform.position = Vector2.Lerp(transform.position, player.transform.position, 2f*Time.deltaTime);
-    }
+    //public void FlyToTarget()
+    //{
+       // transform.position = Vector2.Lerp(transform.position, player.transform.position, 2f*Time.deltaTime);
+  //  }
     public void Update()
     {
-        if (flyToTarget)
-            FlyToTarget();
+       // if (flyToTarget)
+          //  FlyToTarget();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
