@@ -30,7 +30,6 @@ public class PickUps : MonoBehaviour
         {
             if (GameManager.Gm != null)
             {
-                Debug.Log("Gm is here");
                 GameManager.Gm.Collect(Value, gameObject.tag);     // передаем тег собранного лута
                 //PlayAudio();
             }

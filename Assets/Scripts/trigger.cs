@@ -17,7 +17,6 @@ public class trigger : MonoBehaviour
         if (collision.tag == "Player")
         {
             _player.Speed += 2f;
-            Debug.Log("1");
         }
     } 
 

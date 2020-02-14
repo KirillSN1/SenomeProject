@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
         {
             _scoreCoins += amount;
             MainScoreCoinsText.text = "X  " + _scoreCoins.ToString();
-            Debug.Log("Final Score: " + _scoreCoins);
         }
     }
 
@@ -173,7 +172,6 @@ public class GameManager : MonoBehaviour
 
     public void CloseActivePanel(GameObject activeCanvas)
     {
-        Debug.Log("Close " + activeCanvas.name);
         Player.GetComponent<KeyboardInput>().InternalRunning = true;
         _playerState.KeyboardInput = true;
         activeCanvas.SetActive(false);

@@ -28,8 +28,6 @@ public class KeyboardInput : MonoBehaviour
         _player = GetComponent<PlayerBehaviour>();
 
         beginPosPlatform = Platform.localPosition;
-        Debug.Log("Начальное положение" + beginPosPlatform);
-
     }
 
     void Update()
@@ -38,7 +36,7 @@ public class KeyboardInput : MonoBehaviour
         currentPosPlatform = Platform.localPosition;
         if (beginPosPlatform != currentPosPlatform)
         {
-            Platform.localPosition = beginPosPlatform; Debug.Log("Произошло смещение." + currentPosPlatform);
+            Platform.localPosition = beginPosPlatform; //Debug.Log("Произошло смещение." + currentPosPlatform);
         }
 
         if (!InternalRunning)

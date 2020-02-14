@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -187,6 +188,7 @@ MonoBehaviour:
   BeatLevelScore: 0
   MainCanvas: {fileID: 0}
   StartLevelCanvas: {fileID: 0}
+  LoseCanvas: {fileID: 0}
   BeatLevelCanvas: {fileID: 0}
   InputClass: {fileID: 0}
   MainScoreCoinsText: {fileID: 0}
@@ -194,6 +196,7 @@ MonoBehaviour:
   GameState: 0
   GameIsOver: 0
   CurrentLevel: 
+  _scoreCoins: 0
 --- !u!4 &103065341
 Transform:
   m_ObjectHideFlags: 0
@@ -222,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundSourcePrefab: {fileID: 5162944342876257100, guid: 656d8b390dcf43d47b9359232ef79637,
     type: 3}
+  gameManager: {fileID: 0}
   curve:
     serializedVersion: 2
     m_Curve: []
@@ -229,6 +233,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MainAudioSource: {fileID: 0}
+  GameMusic: 0
+  Victory: 0
 --- !u!1 &294314600
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,8 +294,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 72f14b7180f7c4a48bb4bcf143d569f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -543,8 +547,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -574,6 +576,7 @@ GameObject:
   - component: {fileID: 704225792}
   - component: {fileID: 704225789}
   - component: {fileID: 704225791}
+  - component: {fileID: 704225790}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -624,6 +627,20 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &704225790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704225788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed1600af63b20d42a8714cef4c46982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 5162944342876257100, guid: 656d8b390dcf43d47b9359232ef79637,
+    type: 3}
 --- !u!81 &704225791
 AudioListener:
   m_ObjectHideFlags: 0
@@ -701,8 +718,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 57907bbd2d2c2e340a33462afcccead8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -845,8 +860,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -970,8 +983,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1880600874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,8 +1001,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: c2ad0319703fcfd47b427707af202d37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1068,8 +1077,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 700869d89f7dc7d4a86f6c6043959ce4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1142,8 +1149,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &2068793175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,8 +1257,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &2096848183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1272,8 +1275,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 0997c9c96f709a04babab3211186a438, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
