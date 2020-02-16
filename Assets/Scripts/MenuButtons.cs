@@ -32,6 +32,11 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene(idScene);
     }
 
+    public void openURL(string sait) 
+    { 
+        Application.OpenURL(sait); 
+    }
+
     public void OpenTip()
     {
         Debug.Log("We don't have tips yet!");
