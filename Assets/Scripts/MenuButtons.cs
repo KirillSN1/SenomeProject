@@ -5,10 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
+    public GameObject gamePanel;
+
+    private void Start()
+    {
+        gamePanel.SetActive(false);
+    }
     public void StartNewGame()
     {
         Debug.Log("Starting the game!");
         SceneManager.LoadScene(GameManager.Gm.FirstLevel);
+    }
+
+    public void OpenGamePanel()
+    {
+        gamePanel.SetActive(true);
+    }
+
+    public void СloseGamePanel()
+    {
+        gamePanel.SetActive(false);
+    }
+
+    public void OpenLevel(int idScene)
+    {
+        SceneManager.LoadScene(idScene);
     }
 
     public void OpenTip()

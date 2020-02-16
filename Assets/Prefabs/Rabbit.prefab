@@ -4008,12 +4008,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3926859295430292880}
   - component: {fileID: 2374412271054415481}
-  - component: {fileID: 8161793827356047812}
   - component: {fileID: 2360452402007504829}
   - component: {fileID: 4060393478314105533}
   - component: {fileID: 999973473520010570}
   - component: {fileID: 3387057189233103959}
   - component: {fileID: 7198926993059121207}
+  - component: {fileID: 7319222656167621867}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Player
@@ -4086,32 +4086,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &8161793827356047812
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8177835759705418379}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: bc240d5f37fb93248853edcb186e2d03, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.22973648, y: 2.4969916}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.3376331, y: 4.9953175}
-  m_EdgeRadius: 0
 --- !u!50 &2360452402007504829
 Rigidbody2D:
   serializedVersion: 4
@@ -4320,6 +4294,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &7319222656167621867
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177835759705418379}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: bc240d5f37fb93248853edcb186e2d03, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.23196101, y: 2.3824463}
+  m_Size: {x: 1.3310142, y: 4.5299206}
+  m_Direction: 0
 --- !u!1 &8302933833891877005
 GameObject:
   m_ObjectHideFlags: 0
