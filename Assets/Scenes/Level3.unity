@@ -7399,8 +7399,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.23196101, y: 2.5005746}
-  m_Size: {x: 1.3310142, y: 4.984124}
+  m_Offset: {x: 0.23196101, y: 2.3824463}
+  m_Size: {x: 1.3310142, y: 4.5299206}
   m_Direction: 0
 --- !u!1001 &1079093466
 PrefabInstance:
@@ -14695,6 +14695,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1324384032109105824, guid: f083217acf7f1674894205f4c2ce5735,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324384032109105824, guid: f083217acf7f1674894205f4c2ce5735,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.56
+      objectReference: {fileID: 0}
     - target: {fileID: 1849184416782838456, guid: f083217acf7f1674894205f4c2ce5735,
         type: 3}
       propertyPath: _player
