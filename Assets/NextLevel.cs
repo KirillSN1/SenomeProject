@@ -9,7 +9,7 @@ public class NextLevel : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name== "Rabbit")
+        if(collision.name== "Rabbit Player")
         {
             SceneManager.LoadScene(idScenes);
         }
