@@ -112,6 +112,25 @@ public class PlayerBehaviour : MonoBehaviour
        // }
     }
 
+    private void Start()
+    {
+        string Scname = SceneManager.GetActiveScene().name;
+        for (int i =1; i <= 5; i++)//с какой по какую сцену должна быть скорость одинаковой
+        {
+            if (Scname == "Level" + i)
+            {
+                Speed = 8;
+            }
+        }
+        for (int i = 6; i <= 8; i++)//с какой по какую сцену должна быть скорость одинаковой
+        {
+            if (Scname == "Level" + i)
+            {
+                Speed =10;
+            }
+        }
+    }
+
     void Update()
     {   
         if (Health <= 0)
