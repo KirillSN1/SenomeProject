@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Android;
 
@@ -12,7 +11,7 @@ using UnityEngine.Android;
 public class PlayerBehaviour : MonoBehaviour
 {
     [Header("Player Attributes")]
-
+    
     public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
     public float Speed = 4;
@@ -42,6 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Audio settings")]
     public AudioSource ASourсe;
+    private AudioSource  ASourсeC;
     public AudioClip[] FootstepsSounds;
     public AudioClip[] AttackSounds;
     public AudioClip[] JumpSounds;
@@ -66,7 +66,9 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
-    public LayerMask SkyLayer;
+    
+    public bool wasGrounded = true;
+    public GameObject ParticleEffect;
     public bool isGrounded = false;
     [Header("Animation")]
     public Animator Anim;
@@ -91,7 +93,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 _endPosition;
 
     private KnockBack _knockBack;     // экземпляр класса KnockBack, который отталкивает противника
-    private KeyboardInput _keyboardInput;
+    public KeyboardInput _keyboardInput;
 
     void Awake()
     {
@@ -102,23 +104,27 @@ public class PlayerBehaviour : MonoBehaviour
         scale = transform.localScale.x;
 
         _knockBack = GetComponent<KnockBack>();
-
         ASourсe = GetComponent<AudioSource>();
 
-        if (KeyboardInput)
-        {
+        ASourсeC = GetComponentInChildren<AudioSource>();
+
+        //if (KeyboardInput)
+        //{
             _keyboardInput = GetComponent<KeyboardInput>();
-        }
+       // }
     }
 
     void Update()
     {   
-        
         if (Health <= 0)
         {
             IsAlive = false;
         }
-
+        
+        if (wasGrounded && !isGrounded || !wasGrounded && isGrounded)
+        {Instantiate(ParticleEffect, Feet.position-new Vector3(0,0.5f,0), ParticleEffect.transform.rotation);
+        wasGrounded = isGrounded;}
+        
         GetPlayerStates();               // при мерже - оставить эту строку
 
         if (State != PlayerStates.ReceivingDamage)
@@ -134,6 +140,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         AnimationController();
+        PlayAudioClipEvent();
     }
 
     public void GetPlayerStates()
@@ -142,7 +149,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             State = PlayerStates.Dying;
             GetComponent<Collider2D>().enabled = false;
-            GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = null;
+            //GameObject.FindGameObjectWithTag("LiveCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = null;
         }
         if (Anim.GetBool("ReceiveDamage"))
         {
@@ -203,7 +210,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         isGrounded = Physics2D.OverlapCircle(Feet.position, feetRadius, Groundlayer);
-        
         
     }
 
@@ -328,9 +334,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             ASourсe.PlayOneShot(AttackSounds[Random.Range(0, AttackSounds.Length)]);
         }
-        if (Anim.GetFloat("Speed") > 0.01f && isGrounded == true)
+        if (Anim.GetFloat("Speed") >= 0.01f && isGrounded == true)
         {
-            ASourсe.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
+            if(!ASourсeC.isPlaying)
+            ASourсeC.PlayOneShot(FootstepsSounds[Random.Range(0, FootstepsSounds.Length)]);
         }
         if (Anim.GetFloat("JumpVeloc") > jumpVelosThreshold)
         {
@@ -342,6 +349,17 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void makeInvincible(int t)
+    {
+        StartCoroutine(ReceiveDamage(1));
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("obstacle"))
+        makeInvincible(3);  
+    }
+    
     //void OnDrawGizmosSelected()      // показывает поле зрения игрока
     //{    
     //    Gizmos.color = Color.red;
