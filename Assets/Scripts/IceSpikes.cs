@@ -9,25 +9,35 @@ public class IceSpikes : MonoBehaviour
     public int DamageAmount = 1;
     public KnockBack _knockBack;
     public bool IsOnSpike = false;
+    private bool hitBoole;
 
     void Start()
     {
         TimeTillAttack = 0;
+        hitBoole = false;
     }
 
     void Update()
     {
-        if (IsOnSpike)
-        {
-            TimeTillAttack -= Time.deltaTime;
+    //    if (IsOnSpike)
+    //    {
+    //        TimeTillAttack -= Time.deltaTime;
 
-            if (TimeTillAttack < 0)
-            {
-                TimeTillAttack = 0;
-            }
-        }
+    //        if (TimeTillAttack < 0)
+    //        {
+    //            TimeTillAttack = 0;
+    //        }
+    //    }
 
-        if (TimeTillAttack <= 0 && IsOnSpike)
+    //    if (TimeTillAttack <= 0 && IsOnSpike)
+    //    {
+    //        HurtTarget();
+    //    }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Rabbit Player")
         {
             HurtTarget();
         }
@@ -55,10 +65,14 @@ public class IceSpikes : MonoBehaviour
 
     private void HurtTarget()
     {
-        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
-        StartCoroutine(player.ReceiveDamage(DamageAmount));
-        
-        
-        TimeTillAttack = TimeBetweenAttack;      
+        if (hitBoole == false)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
+            //StartCoroutine(player.ReceiveDamage(DamageAmount));
+            player.Hit(DamageAmount);
+
+            TimeTillAttack = TimeBetweenAttack;
+            hitBoole = true; //флаг, чтобы не было двойного удара при отскоке
+        }             
     }
 }

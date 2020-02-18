@@ -193,7 +193,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    
+    public void Hit(int takenDamage)
+    {
+        Health -= takenDamage;
+    }
+
+    public void AddingLife()
+    {
+        Health += 1;
+    }
+
     public IEnumerator ReceiveDamage(int takenDamage)
     {
         Anim.SetBool("ReceiveDamage", true);
