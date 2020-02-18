@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7909290128093764033}
   - component: {fileID: 234477843562798328}
   - component: {fileID: 3583676579080588536}
-  - component: {fileID: 103145197160127979}
+  - component: {fileID: 8240671336519354037}
   m_Layer: 0
   m_Name: "\u043A\u0430\u043F\u0443\u0441\u0442\u0430"
   m_TagString: Coin
@@ -129,7 +129,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.7210636, y: 3.894213}
   m_EdgeRadius: 0
---- !u!114 &103145197160127979
+--- !u!114 &8240671336519354037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,9 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3300126048947309454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65330740ed0bd7b42b65aa58a62b298d, type: 3}
+  m_Script: {fileID: 11500000, guid: e0ca921e4b6f44a4e99c65aee250429e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Value: 1
   player: {fileID: 0}
-  flyToTarget: 0

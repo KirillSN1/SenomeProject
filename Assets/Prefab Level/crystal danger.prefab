@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8418736354312257415}
   - component: {fileID: 8220465311540985420}
   - component: {fileID: 6205663925125131573}
+  - component: {fileID: 1768032279350119011}
   m_Layer: 0
   m_Name: crystal danger
   m_TagString: Untagged
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBetweenAttack: 0.02
   TimeTillAttack: 0
-  DamageAmount: 5
+  DamageAmount: 2
   _knockBack: {fileID: 0}
   IsOnSpike: 0
 --- !u!68 &6205663925125131573
@@ -111,6 +112,35 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.6665911, y: -7.719541}
+  - {x: -1.5810285, y: -6.492925}
+  - {x: -5.0235205, y: 2.7371635}
+  - {x: -3.649103, y: 1.9073141}
+  - {x: -2.190363, y: 0.10923353}
+  - {x: -2.2917247, y: 4.1564713}
+  - {x: -1.6598293, y: 7.892995}
+  - {x: 0.76214015, y: 0.49473992}
+  - {x: 1.4283316, y: 3.063815}
+  - {x: 3.394027, y: 0.28525138}
+  - {x: 5.027517, y: 2.3304183}
+  - {x: 4.954819, y: -4.183881}
+  - {x: 4.9866447, y: -7.639548}
+--- !u!68 &1768032279350119011
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418736354312257413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
