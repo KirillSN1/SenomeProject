@@ -25,7 +25,8 @@ public class NodeAttach : MonoBehaviour
 
     void Update()
     {
-        if (!EditorApplication.isPlaying || runtimeUpdate)
+        //if (!EditorApplication.isPlaying || runtimeUpdate)
+        if (runtimeUpdate)
         {
             spline = spriteShapeController.spline;
             if ((spline.GetPointCount() != 0) && (lastSpritePointCount != 0))

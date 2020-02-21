@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DragonBones;
 
 public class BasicBehavior : MonoBehaviour
 {
-    UnityArmatureComponent a;
+    //UnityArmatureComponent a;
     bool isAttacking = false;
     bool isReached = false;
     
@@ -24,9 +23,9 @@ public class BasicBehavior : MonoBehaviour
     void Start()
     {
         
-       a  = GetComponent(typeof(UnityArmatureComponent)) as UnityArmatureComponent;
-       a.animation.Play("Idle_Animation");
-       chooseDirection(null);
+       //a  = GetComponent(typeof(UnityArmatureComponent)) as UnityArmatureComponent;
+       //a.animation.Play("Idle_Animation");
+       //chooseDirection(null);
     }
 
     // Update is called once per frame
@@ -59,16 +58,16 @@ public class BasicBehavior : MonoBehaviour
         switch (state) 
         {
             case "idle":
-            if (a.animation.lastAnimationName != "Idle_Animation")
-                a.animation.Play("Idle_Animation");
+            //if (a.animation.lastAnimationName != "Idle_Animation")
+                //a.animation.Play("Idle_Animation");
             break;
             case "run":
-            if (a.animation.lastAnimationName != "Walk_Animation")
-                a.animation.Play("Walk_Animation");
+            //if (a.animation.lastAnimationName != "Walk_Animation")
+                //a.animation.Play("Walk_Animation");
             break;
             case "attack":
-            if (a.animation.lastAnimationName != "Attack_Animation")
-                a.animation.Play("Attack_Animation");
+            //if (a.animation.lastAnimationName != "Attack_Animation")
+                //a.animation.Play("Attack_Animation");
             break;
         }
     }
@@ -78,12 +77,12 @@ public class BasicBehavior : MonoBehaviour
         var rb = GetComponent(typeof (Rigidbody2D)) as Rigidbody2D;
         rb.constraints = RigidbodyConstraints2D.None;
         state = "run";
-        chooseDirection(g);      
-            if (currentDirection == "left")
-                a.transform.Translate(Vector2.left*Time.deltaTime);
-            else if (currentDirection == "right")
-                a.transform.Translate(Vector2.right*Time.deltaTime);
-                playAnimationByState(state);
+        chooseDirection(g);
+        if (currentDirection == "left");
+        //a.transform.Translate(Vector2.left*Time.deltaTime);
+        else if (currentDirection == "right")
+            //a.transform.Translate(Vector2.right*Time.deltaTime);
+            playAnimationByState(state);
     }
 
     public void Idle()
@@ -98,7 +97,7 @@ public class BasicBehavior : MonoBehaviour
 
     public void chooseDirection(GameObject target)
     {
-        if (target != null && target.transform.position.x <= a.transform.position.x)
+        if (target != null && target.transform.position.x <= transform.position.x)
         currentDirection = "left";
         else if (target == null)
         currentDirection = "right";
@@ -106,12 +105,12 @@ public class BasicBehavior : MonoBehaviour
         if (currentDirection == "left")
         {
             SightDistance = SightDistanceLeft;
-            a.armature.flipX = true;
+            //a.armature.flipX = true;
         }
         else if (currentDirection == "right")
         {
             SightDistance = SightDistanceRight;
-            a.armature.flipX = false; 
+            //a.armature.flipX = false; 
         }
     }
 
