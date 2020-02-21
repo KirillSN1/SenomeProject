@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DragonBones;
 public class Detect : MonoBehaviour
 {
    BasicBehavior bb;
