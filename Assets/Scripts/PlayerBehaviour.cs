@@ -11,7 +11,7 @@ using UnityEngine.Android;
 public class PlayerBehaviour : MonoBehaviour
 {
     [Header("Player Attributes")]
-
+    
     public int Health = 5;    // значение здоровья игрока не менять!
     public int Attack = 1;
     public float Speed = 4;
@@ -66,7 +66,9 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
-    public LayerMask SkyLayer;
+    
+    public bool wasGrounded = true;
+    public GameObject ParticleEffect;
     public bool isGrounded = false;
     [Header("Animation")]
     public Animator Anim;
@@ -112,32 +114,17 @@ public class PlayerBehaviour : MonoBehaviour
        // }
     }
 
-    private void Start()
-    {
-        string Scname = SceneManager.GetActiveScene().name;
-        for (int i =1; i <= 5; i++)//с какой по какую сцену должна быть скорость одинаковой
-        {
-            if (Scname == "Level" + i)
-            {
-                Speed = 8;
-            }
-        }
-        for (int i = 6; i <= 8; i++)//с какой по какую сцену должна быть скорость одинаковой
-        {
-            if (Scname == "Level" + i)
-            {
-                Speed =10;
-            }
-        }
-    }
-
     void Update()
     {   
         if (Health <= 0)
         {
             IsAlive = false;
         }
-
+        
+        if (wasGrounded && !isGrounded || !wasGrounded && isGrounded)
+        {Instantiate(ParticleEffect, Feet.position-new Vector3(0,0.5f,0), ParticleEffect.transform.rotation);
+        wasGrounded = isGrounded;}
+        
         GetPlayerStates();               // при мерже - оставить эту строку
 
         if (State != PlayerStates.ReceivingDamage)
@@ -193,16 +180,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void Hit(int takenDamage)
-    {
-        Health -= takenDamage;
-    }
-
-    public void AddingLife()
-    {
-        Health += 1;
-    }
-
+    
     public IEnumerator ReceiveDamage(int takenDamage)
     {
         Anim.SetBool("ReceiveDamage", true);
@@ -371,6 +349,17 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void makeInvincible(int t)
+    {
+        StartCoroutine(ReceiveDamage(1));
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("obstacle"))
+        makeInvincible(3);  
+    }
+    
     //void OnDrawGizmosSelected()      // показывает поле зрения игрока
     //{    
     //    Gizmos.color = Color.red;
