@@ -950,7 +950,7 @@ MonoBehaviour:
   AttackSounds: []
   JumpSounds: []
   HitSounds: []
-  jumpVelosThreshold: 2
+  jumpVelosThreshold: 2.5
   FallAccelerationValue: 1.007
   Acc: 0
   AccelerationPower: 0
