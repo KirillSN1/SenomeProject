@@ -66,10 +66,16 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Feet;
     public float feetRadius;
     public LayerMask Groundlayer;
-    
+<<<<<<< HEAD
+    public LayerMask SkyLayer;
     public bool wasGrounded = true;
     public GameObject ParticleEffect;
 
+=======
+    
+    public bool wasGrounded = true;
+    public GameObject ParticleEffect;
+>>>>>>> de162652eef7485ab90ffc3b25ee64a9dc2acf2c
     public bool isGrounded = false;
     [Header("Animation")]
     public Animator Anim;
@@ -115,39 +121,24 @@ public class PlayerBehaviour : MonoBehaviour
        // }
     }
 
-    private void Start()
-    {
-        string Scname = SceneManager.GetActiveScene().name;
-        for (int i =1; i <= 5; i++)//с какой по какую сцену должна быть скорость одинаковой
-        {
-            if (Scname == "Level" + i)
-            {
-                Speed = 8;
-            }
-        }
-        for (int i = 6; i <= 8; i++)//с какой по какую сцену должна быть скорость одинаковой
-        {
-            if (Scname == "Level" + i)
-            {
-                Speed =10;
-            }
-        }
-    }
-
     void Update()
     {   
         if (Health <= 0)
         {
             IsAlive = false;
         }
+<<<<<<< HEAD
         if (wasGrounded && !isGrounded || !wasGrounded && isGrounded)
         {Instantiate(ParticleEffect, Feet.position-new Vector3(0,0.5f,0), ParticleEffect.transform.rotation);
         wasGrounded = isGrounded;}
+
+=======
         
         if (wasGrounded && !isGrounded || !wasGrounded && isGrounded)
         {Instantiate(ParticleEffect, Feet.position-new Vector3(0,0.5f,0), ParticleEffect.transform.rotation);
         wasGrounded = isGrounded;}
         
+>>>>>>> de162652eef7485ab90ffc3b25ee64a9dc2acf2c
         GetPlayerStates();               // при мерже - оставить эту строку
 
         if (State != PlayerStates.ReceivingDamage)
@@ -203,13 +194,14 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void Hit(int takenDamage)
     {
         if (!wasHit)
         {Health -= takenDamage;
         StartCoroutine(makeInvincible(3f));}
     }
-
+    
     public IEnumerator makeInvincible(float t){
         wasHit = true;
         Debug.Log("I am invincible!");
@@ -217,12 +209,14 @@ public class PlayerBehaviour : MonoBehaviour
         wasHit = false;
         Debug.Log("I am not:(!");
     }
-    
     public void AddingLife()
     {
         Health += 1;
     }
 
+=======
+    
+>>>>>>> de162652eef7485ab90ffc3b25ee64a9dc2acf2c
     public IEnumerator ReceiveDamage(int takenDamage)
     {
         Anim.SetBool("ReceiveDamage", true);
@@ -391,6 +385,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void makeInvincible(int t)
+    {
+        StartCoroutine(ReceiveDamage(1));
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("obstacle"))
+        makeInvincible(3);  
+    }
     
     //void OnDrawGizmosSelected()      // показывает поле зрения игрока
     //{    

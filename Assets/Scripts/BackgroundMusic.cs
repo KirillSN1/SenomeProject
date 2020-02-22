@@ -19,7 +19,7 @@ public class BackgroundMusic : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("MainAudioSource") == null)
         {
-            if (GameManager.Gm.CurrentLevel == GameManager.Gm.FirstLevel)
+            if (gameManager.CurrentLevel == gameManager.FirstLevel)
             {
                 Instantiate(BackgroundSourcePrefab);
                 MainAudioSource = GameObject.FindGameObjectWithTag("MainAudioSource").GetComponent<AudioSource>();
@@ -29,7 +29,7 @@ public class BackgroundMusic : MonoBehaviour
 
                 GameMusic = true;
             }
-            if (GameManager.Gm.CurrentLevel == GameManager.Gm.MainMenuLevel)
+            if (gameManager.CurrentLevel == gameManager.MainMenuLevel)
             {
                 Instantiate(BackgroundSourcePrefab);
                 //MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/MainMenu1"));
@@ -69,10 +69,10 @@ public class BackgroundMusic : MonoBehaviour
             } 
         }
         if (Victory)
-            {
+        {
                 MainAudioSource.PlayOneShot(Resources.Load<AudioClip>("BackgroundMusic/Victory0")); //Звук победы
                 Victory = false;
-            }
+        }
 
     }
 
