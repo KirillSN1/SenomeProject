@@ -19,6 +19,7 @@ TagManager:
   - lvl1
   - lvl2
   - playerfeet
+  - obstacle
   layers:
   - Default
   - TransparentFX

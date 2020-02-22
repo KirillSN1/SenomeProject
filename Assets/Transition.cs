@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(PlatformEffector2D))]
 public class Transition : MonoBehaviour
 {
     PlayerBehaviour player;
@@ -11,6 +11,7 @@ public class Transition : MonoBehaviour
     void Awake()
     {
         platform = GetComponent<Collider2D>();
+        platform.usedByEffector = true;
         playerGameObject = GameObject.FindGameObjectWithTag("Player");
         player = playerGameObject.GetComponent<PlayerBehaviour>();
         playerKeyboard = playerGameObject.GetComponent<KeyboardInput>();

@@ -21,7 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float JumpingVelocity;
     public float platformJump = 10;
     public bool DoubleJump = false;
-
+    public bool wasHit = false;
     [HideInInspector]
     public bool IsAlive = true;
     [HideInInspector]
@@ -67,6 +67,9 @@ public class PlayerBehaviour : MonoBehaviour
     public float feetRadius;
     public LayerMask Groundlayer;
     public LayerMask SkyLayer;
+    public bool wasGrounded = true;
+    public GameObject ParticleEffect;
+
     public bool isGrounded = false;
     [Header("Animation")]
     public Animator Anim;
@@ -137,6 +140,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             IsAlive = false;
         }
+        if (wasGrounded && !isGrounded || !wasGrounded && isGrounded)
+        {Instantiate(ParticleEffect, Feet.position-new Vector3(0,0.5f,0), ParticleEffect.transform.rotation);
+        wasGrounded = isGrounded;}
 
         GetPlayerStates();               // при мерже - оставить эту строку
 
@@ -195,9 +201,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Hit(int takenDamage)
     {
-        Health -= takenDamage;
+        if (!wasHit)
+        {Health -= takenDamage;
+        StartCoroutine(makeInvincible(3f));}
     }
-
+    
+    public IEnumerator makeInvincible(float t){
+        wasHit = true;
+        Debug.Log("I am invincible!");
+        yield return new WaitForSeconds(t);
+        wasHit = false;
+        Debug.Log("I am not:(!");
+    }
     public void AddingLife()
     {
         Health += 1;

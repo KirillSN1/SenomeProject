@@ -39,6 +39,8 @@ public class IceSpikes : MonoBehaviour
     {
         if (collision.name == "Rabbit Player")
         {
+            if (transform.parent.CompareTag("obstacle"))
+            transform.parent.GetComponent<BoxCollider2D>().enabled = false;
             HurtTarget();
         }
     }
